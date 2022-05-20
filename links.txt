@@ -1,0 +1,12 @@
+https://github.com/yasirkula/UnityRuntimePreviewGenerator
+https://www.programmersought.com/article/72826703238/
+https://theslidefactory.com/loading-3d-models-from-the-web-at-runtime-in-unity/
+https://github.com/jilleJr/Newtonsoft.Json-for-Unity
+https://habr.com/ru/post/428796/
+
+конвертер https://products.aspose.app/3d/conversion/fbx-to-gltf
+вьювер https://gltf-viewer.donmccurdy.com/
+
+https://nlix.ru/ArTale/Materials.pdf
+https://unitycoder.com/blog/2016/02/23/ui-scroll-view-automatic-content-height/
+https://stackoverflow.com/questions/37493936/android-internet-permission-in-unity
