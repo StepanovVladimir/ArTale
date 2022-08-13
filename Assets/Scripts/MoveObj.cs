@@ -33,12 +33,12 @@ public class MoveObj : MonoBehaviour
                 return;
             }
 
-            if (GetMenuManager().CurrentMoveObj != gameObject)
+            if (taleManager.CurrentMoveObj != gameObject)
             {
                 return;
             }
 
-            if (Utils.IsViewMode)
+            if (taleManager.IsViewMode)
             {
                 return;
             }
@@ -50,7 +50,7 @@ public class MoveObj : MonoBehaviour
                 {
                     transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                 }
-            } 
+            }
             else if (taleManager.actionType == ActionType.Rotate)
             {
                 transform.eulerAngles = new Vector3(
@@ -77,9 +77,9 @@ public class MoveObj : MonoBehaviour
             return;
         }
 
-        if (GetMenuManager().CurrentMoveObj == null)
+        if (taleManager.CurrentMoveObj == null)
         {
-            GetMenuManager().CurrentMoveObj = gameObject;
+            taleManager.CurrentMoveObj = gameObject;
         }
     }
 
@@ -90,11 +90,6 @@ public class MoveObj : MonoBehaviour
             return;
         }
 
-        GetMenuManager().CurrentMoveObj = null;
-    }
-
-    MenuManager GetMenuManager()
-    {
-        return camera.gameObject.GetComponent<MenuManager>();
+        taleManager.CurrentMoveObj = null;
     }
 }

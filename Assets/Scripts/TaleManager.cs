@@ -29,7 +29,7 @@ public class TaleManager : MonoBehaviour
     public GameObject BtnRemoveLink;
     public bool IsModeLink = false;
     public int LinkFirstScene;
-    public Dictionary<int, List<int>> Links;
+    public Dictionary<int, List<int>> Links { get; set; }
 
     public GameObject PanelScenesManager;
     public GameObject PanelScenesGraph;
@@ -44,17 +44,21 @@ public class TaleManager : MonoBehaviour
 
     public int LastSceneNumber;
 
-    public string _TaleName;
+    public GameObject CurrentMoveObj = null;
+
+    public bool IsViewMode { get; set; } = false;
+
+    private string _taleName;
     public string TaleName 
     { 
         get 
         {
-            return _TaleName;
+            return _taleName;
         }
         set
         {
             TextCurrentTale.GetComponent<Text>().text = "Сказка: " + value;
-            _TaleName = value;
+            _taleName = value;
         }
     }
 
@@ -78,7 +82,7 @@ public class TaleManager : MonoBehaviour
 
         BtnAddOnClick(); // first scene
 
-        RenderScene(1);
+        RenderScene();
     }
 
     internal void CreateLink(int secondScene)
@@ -154,12 +158,25 @@ public class TaleManager : MonoBehaviour
         }
     }
 
-    ButtonScene FindButtonById(int id)
+    public ButtonScene FindButtonById(int id)
     {
         foreach (Transform t in PanelScenesGraph.transform)
         {
             var bs = t.GetComponent<ButtonScene>();
             if (bs && bs.SceneId == id)
+            {
+                return bs;
+            }
+        }
+        return null;
+    }
+
+    public ButtonScene FindButtonByScene(Transform scene)
+    {
+        foreach (Transform t in PanelScenesGraph.transform)
+        {
+            var bs = t.GetComponent<ButtonScene>();
+            if (bs && bs.Scene == scene.gameObject)
             {
                 return bs;
             }
@@ -248,7 +265,7 @@ public class TaleManager : MonoBehaviour
 
         ButtonScene bs = btnScene.GetComponent<ButtonScene>();
         bs.Init(scene, this, currentSceneIsNull, LastSceneNumber);
-        
+
         if (currentSceneIsNull)
         {
             CurrentScene = scene;
@@ -301,12 +318,12 @@ public class TaleManager : MonoBehaviour
         Destroy(SelectedBtnScene.gameObject);
     }
 
-    private void RenderScene(int id)
+    private void RenderScene(int id = 1)
     {
         TextSceneNumber.GetComponent<Text>().text = "Scene " + id;
     }
 
-    internal void SelectSceneBtn(ButtonScene buttonScene, GameObject sceneParent)
+    internal void SelectSceneBtn(ButtonScene buttonScene)
     {
         SelectedBtnScene = buttonScene;
         foreach (Transform btn in PanelScenesGraph.transform)

@@ -16,7 +16,7 @@ namespace Assets.Scripts
         public static string PathSaves = Application.persistentDataPath + "/Saves/";
         public static string PathModelsWindows = Application.persistentDataPath + "/Models/"; // for load models win
 
-        public static string PathRootAndroid = "/storage/emulated/0/ArTale/"; // project android root
+        public static string PathRootAndroid = Application.persistentDataPath; // project android root
         public static string PathModelsAndroid = PathRootAndroid + "Models/"; // for load models android
 
         public static string HelpUrl = "https://nlix.ru/ArTale/Materials.pdf";
@@ -32,8 +32,6 @@ namespace Assets.Scripts
 
         public static string UploadUrl = "https://nlix.ru/ArTale/upload.php";
 
-        public static bool IsViewMode = false;
-
         public static void TapDirectory(string path)
         {
             if (!Directory.Exists(path))
@@ -44,11 +42,7 @@ namespace Assets.Scripts
 
         internal static void Init()
         {
-            if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
-
-            }
-            else
+            if (Application.platform != RuntimePlatform.WindowsEditor)
             {
                 PathSaves = PathRootAndroid + "Saves/";
             }

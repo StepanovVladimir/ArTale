@@ -19,15 +19,13 @@ public class ViewManager : MonoBehaviour
     public AudioClip audioClip;
     public string taleName;
 
-    private TaleManager _TaleManager;
+    private TaleModel _taleModel;
     private int CurrentSceneId = 1;
     private int CurrentScriptIndex = 1;
 
-    ScriptScenes Script;
-
     void Start()
     {
-        _TaleManager = GetComponent<TaleManager>();
+        _taleModel = new TaleModel(GetComponent<TaleManager>());
         BtnNext.GetComponent<Button>().onClick.AddListener(Next);
         audioSource = GetComponent<AudioSource>();
 
@@ -37,14 +35,14 @@ public class ViewManager : MonoBehaviour
 
     private void End()
     {
-        Utils.IsViewMode = false;
+        _taleModel.IsViewMode = false;
 
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelMenu);
     }
 
     public void Run(string taleName)
     {
-        Utils.IsViewMode = true;
+        _taleModel.IsViewMode = true;
 
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelTaleView);
         PanelEnd.SetActive(false);
@@ -54,11 +52,12 @@ public class ViewManager : MonoBehaviour
         CurrentSceneId = 1;
         CurrentScriptIndex = 0;
 
-        TaleModel tm = new TaleModel();
-        Script = tm.LoadScript(taleName);
-        Debug.Log(JsonUtility.ToJson(Script, true));
+        _taleModel.TaleName = taleName;
+        _taleModel.Load();
+        _taleModel.Script = _taleModel.LoadScript();
+        Debug.Log(JsonUtility.ToJson(_taleModel.Script, true));
 
-        ShowScript(CurrentSceneId, CurrentScriptIndex);
+        ShowScript();
     }
 
     private void Next()
@@ -69,36 +68,32 @@ public class ViewManager : MonoBehaviour
         if (CurrentScriptIndex < ss.script.Count - 1)
         {
             CurrentScriptIndex++;
-            ShowScript(CurrentSceneId, CurrentScriptIndex);
+            ShowScript();
             return;
         }
-        else
-        {
-            CurrentSceneId++;
-            CurrentScriptIndex = 0;
-        }
 
-        ScriptScene ssNext = FindScene(CurrentSceneId);
+        CurrentScriptIndex = 0;
+        ScriptScene ssNext = FindScene(CurrentSceneId + 1);
         if (ssNext != null)
         {
-            ShowScript(CurrentSceneId, CurrentScriptIndex);
+            CurrentSceneId++;
+            ShowScript();
         } 
         else
         {
-            CurrentSceneId--;
             PanelEnd.SetActive(true);
         }
     }
 
-    private void ShowScript(int sceneId, int scriptIndex)
+    private void ShowScript()
     {
-        Debug.Log(sceneId + " " + scriptIndex);
-        _TaleManager.ShowSceneById(CurrentSceneId);
+        Debug.Log(CurrentSceneId + " " + CurrentScriptIndex);
+        _taleModel.ShowSceneById(CurrentSceneId);
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelTaleView);
 
-        ScriptScene ss = FindScene(sceneId);
+        ScriptScene ss = FindScene(CurrentSceneId);
         TextTitle.GetComponent<Text>().text = "<b>" + ss.title + "</b>";
-        ScriptPart sp = ss.script[scriptIndex];
+        ScriptPart sp = ss.script[CurrentScriptIndex];
         TextDescription.GetComponent<Text>().text = sp.text;
         if (sp.song != null)
         {
@@ -132,6 +127,6 @@ public class ViewManager : MonoBehaviour
 
     private ScriptScene FindScene(int sceneId)
     {
-        return Script.scenes.Find(x => x.sceneId == sceneId);
+        return _taleModel.Script.scenes.Find(x => x.sceneId == sceneId);
     }
 }

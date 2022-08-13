@@ -23,15 +23,12 @@ public class ButtonLoadTale : MonoBehaviour
         MenuManager mm = camera.GetComponent<MenuManager>();
         if (IsEdit)
         {
-            TaleModel TaleModelObj = new TaleModel();
-            TaleManager taleManager = camera.GetComponent<TaleManager>();
-            taleManager.TaleName = TaleName;
-            TaleModelObj.Load(TaleName, taleManager);
+            mm.LoadTaleByTaleName(TaleName);
         }
         else
         {
             mm.PanelMenu = PanelMainMenu;
-            mm.GetComponent<ViewManager>().Run(TaleName);
+            mm.RunViewByTaleName(TaleName);
         }
 
         Utils.HideOtherPanels(PanelEditOrView);

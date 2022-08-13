@@ -10,10 +10,10 @@ public class PreviewSceneObject : MonoBehaviour
     void Start()
     {
         Button btn = GetComponent<Button>();
-        btn.onClick.AddListener(OnMouseUp);
+        btn.onClick.AddListener(OnMouseClick);
     }
 
-    void OnMouseUp()
+    void OnMouseClick()
     {
         Debug.Log("Drag ended!");
         Vector3 Ray_start_position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -31,16 +31,5 @@ public class PreviewSceneObject : MonoBehaviour
         obj.transform.localPosition = new Vector3(hit.point.x, 0.06f, hit.point.z);
         //Debug.Log(hit.point);
         //Debug.Log(obj.transform.position);
-    }
-
-    // test
-    bool a = false;
-    void Update()
-    {
-        if (!a)
-        {
-            a = true;
-            //OnMouseUp();
-        }
     }
 }

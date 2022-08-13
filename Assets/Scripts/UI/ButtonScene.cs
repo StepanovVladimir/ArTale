@@ -57,7 +57,7 @@ public class ButtonScene : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
         Debug.Log("down");
         IsMoving = true;
-        taleManager.SelectSceneBtn(this, Scene);
+        taleManager.SelectSceneBtn(this);
     }
 
     public void OnPointerUp(PointerEventData eventData)

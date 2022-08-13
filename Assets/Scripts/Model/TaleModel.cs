@@ -16,9 +16,41 @@ namespace Assets.Scripts
 {
     class TaleModel
     {
-        public string TaleName;
+        public ScriptScenes Script { get; set; }
 
-        public static List<string> LoadTaleList()
+        private TaleManager _taleManager;
+
+        public TaleModel(TaleManager taleManager)
+        {
+            _taleManager = taleManager;
+        }
+
+        public string TaleName
+        {
+            get
+            {
+                return _taleManager.TaleName;
+            }
+
+            set
+            {
+                _taleManager.TaleName = value;
+            }
+        }
+
+        public bool IsViewMode
+        {
+            get
+            {
+                return _taleManager.IsViewMode;
+            }
+
+            set
+            {
+                _taleManager.IsViewMode = value;
+            }
+        }
+        public List<string> LoadTaleList()
         {
             List<string> talesNames = new List<string>();
             var paths = Directory.GetDirectories(Utils.PathSaves);
@@ -29,49 +61,38 @@ namespace Assets.Scripts
             return talesNames;
         }
 
-        public void Create(string taleName, TaleManager taleManager)
+        public void Create()
         {
-            taleManager.ClearTale();
-            taleManager.BtnAddOnClick();
-            taleManager.UpdateVisibleScenes();
+            _taleManager.ClearTale();
+            _taleManager.BtnAddOnClick();
+            _taleManager.UpdateVisibleScenes();
         }
 
-        public void Load(string taleName, TaleManager taleManager)
+        public void Load()
         {
-            Tale tale = ReadFile(taleName);
-            Unserialize(taleManager, taleName, tale);
+            Tale tale = ReadFile();
+            Unserialize(tale);
         }
 
-        public void Save(string taleName, TaleManager taleManager)
+        public void Save()
         {
-            TaleName = taleName;
-            Tale tale = Serialize(taleManager);
-            WriteFile(taleName, tale);
+            Tale tale = Serialize();
+            WriteFile(tale);
         }
 
-        private Tale ReadFile(string taleName)
+        private Tale ReadFile()
         {
-            string pathTaleRoot = Utils.PathSaves + taleName + "/";
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             string pathTale = pathTaleRoot + "tale.json";
             string json = File.ReadAllText(pathTale);
             return JsonUtility.FromJson<Tale>(json);
         }
 
-        public static string ZipTale(string taleName)
-        {
-            string pathTale = Utils.PathSaves + taleName + "/";
-            string pathTaleZip = Utils.PathSaves + taleName + ".zip";
-            if (File.Exists(pathTaleZip))
-            {
-                File.Delete(pathTaleZip);
-            }
-            ZipFile.CreateFromDirectory(pathTale, pathTaleZip);
-            return pathTaleZip;
-        }
+        
 
-        private void WriteFile(string taleName, Tale tale)
+        private void WriteFile(Tale tale)
         {
-            string pathTaleRoot = Utils.PathSaves + taleName + "/";
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             Utils.TapDirectory(pathTaleRoot);
             string pathTale = pathTaleRoot + "tale.json";
             string pathModels = pathTaleRoot + "Models/";
@@ -81,28 +102,28 @@ namespace Assets.Scripts
             File.WriteAllText(pathTale, json);
         }
 
-        public static long ConvertToUnixTime(DateTime datetime)
+        public long ConvertToUnixTime(DateTime datetime)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return (long)(datetime - sTime).TotalSeconds;
         }
 
-        public static DateTime UnixTimeToDateTime(long unixtime)
+        public DateTime UnixTimeToDateTime(long unixtime)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return sTime.AddSeconds(unixtime);
         }
 
-        private void Unserialize(TaleManager taleManager, string taleName, Tale tale)
+        private void Unserialize(Tale tale)
         {
-            string pathTaleRoot = Utils.PathSaves + taleName + "/";
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             string pathModels = pathTaleRoot + "Models/";
 
-            taleManager.ClearTale();
+            _taleManager.ClearTale();
 
             foreach (Scene scene in tale.scenes)
             {
-                ButtonScene bs = taleManager.CreateScene(scene.name);
+                ButtonScene bs = _taleManager.CreateScene(scene.name);
                 bs.SceneId = scene.id;
                 bs.gameObject.transform.position = scene.btnPosition;
                 foreach (Obj obj in scene.objs)
@@ -111,20 +132,20 @@ namespace Assets.Scripts
                     objModel.transform.SetParent(bs.Scene.transform);
                 }
             }
-            taleManager.UpdateVisibleScenes();
-            LoadModels(pathModels, taleManager.GetComponent<DrawPreviewSceneObjects>());
+            _taleManager.UpdateVisibleScenes();
+            LoadModels(pathModels);
             // set links
-            taleManager.Links = new Dictionary<int, List<int>>();
+            _taleManager.Links = new Dictionary<int, List<int>>();
             foreach (string kv in tale.Links)
             {
                 string[] ab = kv.Split(new char[] { ':' });
                 List<int> b = ab[1].Split(new char[] { ',' }).Select(x => Convert.ToInt32(x)).ToList();
-                taleManager.Links.Add(Convert.ToInt32(ab[0]), b);
+                _taleManager.Links.Add(Convert.ToInt32(ab[0]), b);
             }
-            taleManager.RenderLinks();
+            _taleManager.RenderLinks();
         }
 
-        public static string Download(string link)
+        public string Download(string link)
         {
             string[] parts = link.Split(new char[] { '/' });
             string taleNameZip = parts[parts.Length - 1];
@@ -147,8 +168,37 @@ namespace Assets.Scripts
             return taleName;
         }
 
-        private void LoadModels(string modelDir, DrawPreviewSceneObjects drawerPreview)
+        public ShareResponse Share()
         {
+            Utils.DisableSSL();
+            using (WebClient client = new WebClient())
+            {
+                string filepath = ZipTale();
+
+                byte[] responseB = client.UploadFile(Utils.UploadUrl + "?taleName=" + TaleName, filepath);
+                string response = Encoding.Default.GetString(responseB);
+                Debug.Log(response);
+
+                return JsonUtility.FromJson<ShareResponse>(response);
+            }
+        }
+
+        private string ZipTale()
+        {
+            string pathTale = Utils.PathSaves + TaleName + "/";
+            string pathTaleZip = Utils.PathSaves + TaleName + ".zip";
+            if (File.Exists(pathTaleZip))
+            {
+                File.Delete(pathTaleZip);
+            }
+            ZipFile.CreateFromDirectory(pathTale, pathTaleZip);
+            return pathTaleZip;
+        }
+
+        public void LoadModels(string modelDir)
+        {
+            DrawPreviewSceneObjects drawerPreview = _taleManager.GetComponent<DrawPreviewSceneObjects>();
+            drawerPreview.ClearObjectsForScene();
             var paths = Directory.GetFiles(modelDir, "*.gltf", SearchOption.TopDirectoryOnly);
             foreach (string path in paths)
             {
@@ -156,6 +206,10 @@ namespace Assets.Scripts
                 {
                     GameObject model = CreateObjFromFile(path);
                     model.transform.SetParent(drawerPreview.ObjectsForScene.transform);
+                    if (modelDir.Equals(Utils.CalcModelsLoadPath()))
+                    {
+                        AddModel(path);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -165,40 +219,27 @@ namespace Assets.Scripts
             drawerPreview.RenderObjectsPreview();
         }
 
-        private Tale Serialize(TaleManager taleManager)
+        private Tale Serialize()
         {
             Tale tale = new Tale();
             tale.Edited = ConvertToUnixTime(DateTime.Now);
-            foreach (Transform _scene in taleManager.ImgTarget.transform)
+            foreach (Transform _scene in _taleManager.ImgTarget.transform)
             {
                 Scene scene = new Scene();
                 scene.objs = SerializeObj(_scene);
-                ButtonScene bs = FindButtonScene(taleManager, _scene);
+                ButtonScene bs = _taleManager.FindButtonByScene(_scene);
                 scene.name = bs.GetComponentInChildren<Text>().text;
                 scene.id = bs.SceneId;
                 scene.btnPosition = bs.gameObject.transform.position;
                 tale.scenes.Add(scene);
             }
             tale.Links = new List<string>();
-            foreach (var kv in taleManager.Links)
+            foreach (var kv in _taleManager.Links)
             {
                 List<string> ls = kv.Value.Select(x => x.ToString()).ToList();
                 tale.Links.Add(kv.Key + ":" + string.Join(",", ls));
             }
             return tale;
-        }
-
-        private ButtonScene FindButtonScene(TaleManager taleManager, Transform scene)
-        {
-            foreach (Transform t in taleManager.PanelScenesGraph.transform)
-            {
-                var bs = t.GetComponent<ButtonScene>();
-                if (bs  && bs.Scene == scene.gameObject)
-                {
-                    return bs;
-                }
-            }
-            return null;
         }
 
         private GameObject UnserializeObj(Obj obj, string pathModels)
@@ -236,7 +277,7 @@ namespace Assets.Scripts
             return objs;
         }
 
-        public static GameObject CreateObjFromFile(string path)
+        private GameObject CreateObjFromFile(string path)
         {
             GameObject model = Importer.LoadFromFile(path);
             model.AddComponent<BoxCollider>();
@@ -245,9 +286,9 @@ namespace Assets.Scripts
             return model;
         }
 
-        internal void AddModel(string path)
+        private void AddModel(string path)
         {
-            string pathTaleRoot = Utils.PathSaves + TaleName+ "/";
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             Utils.TapDirectory(pathTaleRoot);
 
             string pathModels = pathTaleRoot + "Models/";
@@ -261,12 +302,17 @@ namespace Assets.Scripts
             File.Copy(path, dest);
         }
 
-        public ScriptScenes LoadScript(string taleName)
+        public ScriptScenes LoadScript()
         {
-            string pathTaleRoot = Utils.PathSaves + taleName + "/";
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             string pathTale = pathTaleRoot + "script.json";
             string json = File.ReadAllText(pathTale);
             return JsonUtility.FromJson<ScriptScenes>(json);
+        }
+
+        public void ShowSceneById(int id)
+        {
+            _taleManager.ShowSceneById(id);
         }
     }
 }

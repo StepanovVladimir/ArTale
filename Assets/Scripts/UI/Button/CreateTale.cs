@@ -24,11 +24,11 @@ public class CreateTale : MonoBehaviour
         }
 
         GameObject camera = GameObject.Find("ARCamera");
-        camera.GetComponent<TaleManager>().TaleName = taleName;
 
-        TaleModel TaleModelObj = new TaleModel();
-        TaleModelObj.Create(taleName, camera.GetComponent<TaleManager>());
         MenuManager mm = camera.GetComponent<MenuManager>();
+
+        mm.CreateTale(taleName);
+
         mm.LoadModels();
         mm.OnClickSaveTale();
 

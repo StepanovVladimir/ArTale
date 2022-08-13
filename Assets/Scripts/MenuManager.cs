@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,9 +40,8 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelTale;
     public GameObject PanelTaleView;
 
-    TaleModel TaleModelObj;
+    private TaleModel _taleModel;
 
-    public GameObject CurrentMoveObj = null;
     public GameObject PanelMainMenu;
 
     void Start()
@@ -71,15 +71,32 @@ public class MenuManager : MonoBehaviour
 
         BtnRunView.GetComponent<Button>().onClick.AddListener(RunView);
 
-        UpdateScrollLoadTale();
+        _taleModel = new TaleModel(GetComponent<TaleManager>());
 
-        TaleModelObj = new TaleModel();
+        UpdateScrollLoadTale();
     }
 
     private void RunView()
     {
         GetComponent<MenuManager>().PanelMenu = PanelEditorMenu;
-        GetComponent<ViewManager>().Run(GetComponent<TaleManager>().TaleName);
+        GetComponent<ViewManager>().Run(_taleModel.TaleName);
+    }
+
+    public void RunViewByTaleName(string taleName)
+    {
+        GetComponent<ViewManager>().Run(taleName);
+    }
+
+    public void LoadTaleByTaleName(string taleName)
+    {
+        _taleModel.TaleName = taleName;
+        _taleModel.Load();
+    }
+
+    public void CreateTale(string taleName)
+    {
+        _taleModel.TaleName = taleName;
+        _taleModel.Create();
     }
 
     void UpdateScrollLoadTale()
@@ -93,7 +110,7 @@ public class MenuManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        List<string> talesNames = TaleModel.LoadTaleList();
+        List<string> talesNames = _taleModel.LoadTaleList();
 
         int i = 0;
         foreach (string name in talesNames)
@@ -129,14 +146,10 @@ public class MenuManager : MonoBehaviour
         {
             Utils.DisableSSL();
             string link = TaleLinkInput.GetComponent<InputField>().text;
-            string taleName = TaleModel.Download(link);
+            string taleName = _taleModel.Download(link);
 
             // load scenes
-            TaleModel TaleModelObj = new TaleModel();
-            TaleManager taleManager = GetComponent<TaleManager>();
-            taleManager.TaleName = taleName;
-            taleManager.CurrentScene = null;
-            TaleModelObj.Load(taleName, taleManager);
+            _taleModel.TaleName = taleName;
 
             RunView();
         }
@@ -148,6 +161,29 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void ShareTale()
+    {
+        TaleLinkOutput.GetComponent<InputField>().text = "";
+
+        try
+        {
+            ShareResponse shareResp = _taleModel.Share();
+
+            if (shareResp.status)
+            {
+                TaleLinkOutput.GetComponent<InputField>().text = shareResp.link;
+            }
+            else
+            {
+                ShowMessage(shareResp.message);
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(ex.Message + "  " + ex.StackTrace);
+        }
+    }
+
     private void OnClickOk()
     {
         PanelMessage.SetActive(false);
@@ -155,7 +191,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadModels()
     {
-        string TaleName = GetComponent<TaleManager>().TaleName;
+        string TaleName = _taleModel.TaleName;
         if (TaleName == null || TaleName.Length == 0)
         {
             Debug.Log("Set a name for the tale and save it before doing so.");
@@ -163,34 +199,9 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
-        TaleModelObj.TaleName = TaleName;
-        DrawPreviewSceneObjects drawerPreview = GetComponent<DrawPreviewSceneObjects>();
-
         try
         {
-            string modelDir = Utils.CalcModelsLoadPath();
-            if (modelDir.Length != 0)
-            {
-                drawerPreview.ClearObjectsForScene();
-
-                Debug.Log(modelDir);
-                var paths = Directory.GetFiles(modelDir, "*.gltf", SearchOption.TopDirectoryOnly);
-                foreach (string path in paths)
-                {
-                    try
-                    {
-                        GameObject model = TaleModel.CreateObjFromFile(path);
-                        model.transform.SetParent(drawerPreview.ObjectsForScene.transform);
-                        TaleModelObj.AddModel(path);
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Log("1" + " " + ex.Message + " " + ex.Source + " " + ex.StackTrace);
-                    }
-                }
-
-                drawerPreview.RenderObjectsPreview();
-            }
+            _taleModel.LoadModels(Utils.CalcModelsLoadPath());
         }
         catch (Exception ex)
         {
@@ -216,13 +227,13 @@ public class MenuManager : MonoBehaviour
 
     public void OnClickSaveTale()
     {
-        string taleName = GetComponent<TaleManager>().TaleName;
+        string taleName = _taleModel.TaleName;
         if (taleName.Length == 0)
         {
             return;
         }
 
-        TaleModelObj.Save(taleName, GetComponent<TaleManager>());
+        _taleModel.Save();
 
         UpdateScrollLoadTale();
     }
