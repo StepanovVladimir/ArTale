@@ -38,6 +38,7 @@ public class MenuManager : MonoBehaviour
 
     public GameObject BtnRunView;
     public GameObject PanelTale;
+    public GameObject PanelScript;
     public GameObject PanelTaleView;
 
     private TaleModel _taleModel;

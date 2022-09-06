@@ -11,13 +11,19 @@ public enum ActionType { Move, Rotate, Height };
 public class TaleManager : MonoBehaviour
 {
     public GameObject TextSceneNumber;
+    public GameObject TextScriptSceneNumber;
     public GameObject TextCurrentTale;
 
     public GameObject CurrentScene;
+    public int CurrentSceneId;
 
     public ButtonScene SelectedBtnScene;
 
     public GameObject ImgTarget;
+
+    public GameObject BtnScriptBack;
+    public GameObject InputSceneName;
+    public GameObject InputSceneScript;
 
     public GameObject BtnBack;
     public GameObject BtnAdd;
@@ -37,6 +43,7 @@ public class TaleManager : MonoBehaviour
 
     public Color ColorActionSelected;
     public Color ColorActionUnselected;
+    public GameObject BtnScript;
     public GameObject BtnMove;
     public GameObject BtnRotate;
     public GameObject BtnHeight;
@@ -46,12 +53,15 @@ public class TaleManager : MonoBehaviour
 
     public GameObject CurrentMoveObj = null;
 
+    public List<string> SceneNames;
+    public List<string> SceneScripts;
+
     public bool IsViewMode { get; set; } = false;
 
     private string _taleName;
-    public string TaleName 
-    { 
-        get 
+    public string TaleName
+    {
+        get
         {
             return _taleName;
         }
@@ -68,6 +78,8 @@ public class TaleManager : MonoBehaviour
 
         PanelScenesManager.SetActive(false);
 
+        BtnScriptBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
+
         BtnBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
         BtnAdd.GetComponent<Button>().onClick.AddListener(BtnAddOnClick);
         BtnShow.GetComponent<Button>().onClick.AddListener(BtnShowOnClick);
@@ -76,6 +88,7 @@ public class TaleManager : MonoBehaviour
         BtnAddLink.GetComponent<Button>().onClick.AddListener(BtnAddLinkOnClick);
         BtnRemoveLink.GetComponent<Button>().onClick.AddListener(BtnRemoveLinkClick);
 
+        BtnScript.GetComponent<Button>().onClick.AddListener(BtnShowPanelScriptOnClick);
         BtnMove.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Move));
         BtnRotate.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Rotate));
         BtnHeight.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Height));
@@ -152,7 +165,7 @@ public class TaleManager : MonoBehaviour
                 lineImage.rectTransform.sizeDelta = new Vector2(width, 2);
                 lineImage.rectTransform.pivot = new Vector2(0, 0);
                 lineImage.rectTransform.localPosition = objA.transform.position;
-                var rad = (float) Math.Asin(delta.normalized.y);
+                var rad = (float)Math.Asin(delta.normalized.y);
                 lineImage.rectTransform.Rotate(new Vector3(0, 0, -rad * 180 / 3.14f));
             }
         }
@@ -194,8 +207,15 @@ public class TaleManager : MonoBehaviour
 
     }
 
+    private void BtnShowPanelScriptOnClick()
+    {
+        IsViewMode = true;
+        Utils.HideOtherPanels(GetComponent<MenuManager>().PanelScript);
+    }
+
     private void BtnBackOnClick()
     {
+        IsViewMode = false;
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelTale);
     }
 
@@ -222,11 +242,14 @@ public class TaleManager : MonoBehaviour
     public void ClearTale()
     {
         Links = new Dictionary<int, List<int>>();
+        SceneNames = new List<string>();
+        SceneScripts = new List<string>();
         LinkFirstScene = -1;
         IsModeLink = false;
         LastSceneNumber = 1;
         SelectedBtnScene = null;
         CurrentScene = null;
+        CurrentSceneId = 0;
         foreach (Transform sc in ImgTarget.transform)
         {
             Destroy(sc.gameObject);
@@ -252,6 +275,8 @@ public class TaleManager : MonoBehaviour
     public void BtnAddOnClick()
     {
         CreateScene("Scene " + LastSceneNumber);
+        SceneNames.Add("");
+        SceneScripts.Add("");
     }
 
     public ButtonScene CreateScene(string btnName)
@@ -269,6 +294,7 @@ public class TaleManager : MonoBehaviour
         if (currentSceneIsNull)
         {
             CurrentScene = scene;
+            CurrentSceneId = LastSceneNumber;
             SelectedBtnScene = bs;
         }
 
@@ -286,6 +312,7 @@ public class TaleManager : MonoBehaviour
         }
         Debug.Log("SelectedId " + SelectedBtnScene.SceneId);
         CurrentScene = SelectedBtnScene.Scene;
+        CurrentSceneId = SelectedBtnScene.SceneId;
         RenderScene(SelectedBtnScene.SceneId);
         UpdateVisibleScenes();
         foreach (Transform sceneBtn in PanelScenesGraph.transform)
@@ -306,6 +333,9 @@ public class TaleManager : MonoBehaviour
         {
             scene.gameObject.SetActive(scene.gameObject == SelectedBtnScene.Scene);
         }
+
+        InputSceneName.GetComponent<InputField>().text = SceneNames[SelectedBtnScene.SceneId - 1];
+        InputSceneScript.GetComponent<InputField>().text = SceneScripts[SelectedBtnScene.SceneId - 1];
     }
 
     private void BtnRemoveOnClick()
@@ -321,6 +351,7 @@ public class TaleManager : MonoBehaviour
     private void RenderScene(int id = 1)
     {
         TextSceneNumber.GetComponent<Text>().text = "Scene " + id;
+        TextScriptSceneNumber.GetComponent<Text>().text = "Scene " + id;
     }
 
     internal void SelectSceneBtn(ButtonScene buttonScene)
@@ -334,5 +365,15 @@ public class TaleManager : MonoBehaviour
                 btnScene.toggleSelection(btnScene == buttonScene);
             }
         }
+    }
+
+    public void OnInputSceneNameChanged()
+    {
+        SceneNames[CurrentSceneId - 1] = InputSceneName.GetComponent<InputField>().text;
+    }
+
+    public void OnInputSceneScriptChanged()
+    {
+        SceneScripts[CurrentSceneId - 1] = InputSceneScript.GetComponent<InputField>().text;
     }
 }

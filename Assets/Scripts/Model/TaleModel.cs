@@ -71,13 +71,15 @@ namespace Assets.Scripts
         public void Load()
         {
             Tale tale = ReadFile();
-            Unserialize(tale);
+            ScriptScenes script = ReadScript();
+            Unserialize(tale, script);
         }
 
         public void Save()
         {
             Tale tale = Serialize();
-            WriteFile(tale);
+            ScriptScenes script = GetScript();
+            WriteFile(tale, script);
         }
 
         private Tale ReadFile()
@@ -88,9 +90,31 @@ namespace Assets.Scripts
             return JsonUtility.FromJson<Tale>(json);
         }
 
-        
+        private ScriptScenes ReadScript()
+        {
+            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
+            string pathScript = pathTaleRoot + "script.json";
+            string json = File.ReadAllText(pathScript);
+            return JsonUtility.FromJson<ScriptScenes>(json);
+        }
 
-        private void WriteFile(Tale tale)
+        private ScriptScenes GetScript()
+        {
+            ScriptScenes script = new ScriptScenes { scenes = new List<ScriptScene>() };
+            for (int i = 0; i < _taleManager.SceneNames.Count; i++)
+            {
+                script.scenes.Add(new ScriptScene
+                {
+                    sceneId = i + 1,
+                    title = _taleManager.SceneNames[i],
+                    script = new List<ScriptPart> { new ScriptPart { text = _taleManager.SceneScripts[i] } }
+                });
+            }
+
+            return script;
+        }
+
+        private void WriteFile(Tale tale, ScriptScenes script)
         {
             string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             Utils.TapDirectory(pathTaleRoot);
@@ -100,6 +124,10 @@ namespace Assets.Scripts
             string json = JsonUtility.ToJson(tale, true);
             Debug.Log(pathTale);
             File.WriteAllText(pathTale, json);
+
+            string pathScript = pathTaleRoot + "script.json";
+            json = JsonUtility.ToJson(script, true);
+            File.WriteAllText(pathScript, json);
         }
 
         public long ConvertToUnixTime(DateTime datetime)
@@ -114,7 +142,7 @@ namespace Assets.Scripts
             return sTime.AddSeconds(unixtime);
         }
 
-        private void Unserialize(Tale tale)
+        private void Unserialize(Tale tale, ScriptScenes script)
         {
             string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             string pathModels = pathTaleRoot + "Models/";
@@ -131,6 +159,9 @@ namespace Assets.Scripts
                     GameObject objModel = UnserializeObj(obj, pathModels);
                     objModel.transform.SetParent(bs.Scene.transform);
                 }
+
+                _taleManager.SceneNames.Add(script.scenes[scene.id - 1].title);
+                _taleManager.SceneScripts.Add(script.scenes[scene.id - 1].script[0].text);
             }
             _taleManager.UpdateVisibleScenes();
             LoadModels(pathModels);
