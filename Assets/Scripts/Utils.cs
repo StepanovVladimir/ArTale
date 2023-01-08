@@ -16,7 +16,7 @@ namespace Assets.Scripts
         public static string PathSaves = Application.persistentDataPath + "/Saves/";
         public static string PathModelsWindows = Application.persistentDataPath + "/Models/"; // for load models win
 
-        public static string PathRootAndroid = Application.persistentDataPath; // project android root
+        public static string PathRootAndroid = Application.persistentDataPath + "/"; // project android root
         public static string PathModelsAndroid = PathRootAndroid + "Models/"; // for load models android
 
         public static string HelpUrl = "https://nlix.ru/ArTale/Materials.pdf";

@@ -64,7 +64,7 @@ public class MoveObj : MonoBehaviour
                 ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
                 {
-                    transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, hit.point.y - 0.1f, transform.position.z);
                 }
             }
         }

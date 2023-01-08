@@ -30,7 +30,7 @@ public class CreateTale : MonoBehaviour
         mm.CreateTale(taleName);
 
         mm.LoadModels();
-        mm.OnClickSaveTale();
+        //mm.OnClickSaveTale();
 
         Utils.HideOtherPanels(PanelTale);
     }

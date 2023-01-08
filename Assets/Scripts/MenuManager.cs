@@ -148,6 +148,7 @@ public class MenuManager : MonoBehaviour
             Utils.DisableSSL();
             string link = TaleLinkInput.GetComponent<InputField>().text;
             string taleName = _taleModel.Download(link);
+            UpdateScrollLoadTale();
 
             // load scenes
             _taleModel.TaleName = taleName;
