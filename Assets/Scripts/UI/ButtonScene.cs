@@ -19,7 +19,7 @@ public class ButtonScene : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public int LastSceneNumber;
 
     public bool IsMoving = false;
-
+    public Vector3 delta;
 
     public Canvas canvas;
 
@@ -57,6 +57,7 @@ public class ButtonScene : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
         Debug.Log("down");
         IsMoving = true;
+        delta = Input.mousePosition - transform.position;
         taleManager.SelectSceneBtn(this);
     }
 
@@ -79,7 +80,7 @@ public class ButtonScene : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             transform.localPosition = pos;
             */ // Screen Space - Camera
 
-            transform.position = Input.mousePosition; // Screen Space - Overlay
+            transform.position = Input.mousePosition - delta; // Screen Space - Overlay
         }
     }
 

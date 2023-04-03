@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 956482832056254407}
   - component: {fileID: 956482832056254402}
   m_Layer: 5
-  m_Name: ButtonScene1
+  m_Name: ButtonScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1, y: 38.182014}
-  m_SizeDelta: {x: 89.484, y: 31.662}
+  m_SizeDelta: {x: 140, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &956482832056254401
 CanvasRenderer:
@@ -213,4 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2db36742a7dc4f97b85e8c4206dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentScene: {fileID: 0}
+  Scene: {fileID: 0}
+  taleManager: {fileID: 0}
+  IsCurrent: 0
+  SceneId: 0
+  LastSceneNumber: 0
+  IsMoving: 0
+  canvas: {fileID: 0}

@@ -14,21 +14,26 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             ActingCharacter = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
+                StorylineString = $"{characters.Hero} побеждает трёхглавого змея";
                 AdditionalCharacter1 = characters.Antagonist1;
                 AdditionalCharacter2 = characters.Victim;
             }
             else if (taleKind == TaleKind.SisterSavesBrotherFromBabaYaga)
             {
+                //StorylineString = "Сестра хитростью сажает бабу-ягу в печь";
                 AdditionalCharacter1 = characters.Antagonist2;
                 AdditionalCharacter2 = characters.Victim;
             }
             else
             {
+                StorylineString = $"{characters.Hero} садит дочь бабы-яги в печь, попросив ее показать, как влезать";
                 AdditionalCharacter1 = characters.Antagonist2;
             }
         }
 
         public string Name { get; } = "Победа";
+
+        public string StorylineString { get; }
 
         public string Place { get; set; }
 

@@ -22,6 +22,7 @@ public class TaleManager : MonoBehaviour
     public GameObject ImgTarget;
 
     public GameObject BtnScriptBack;
+    public GameObject BtnWholeTextBack;
     public GameObject InputSceneName;
     public GameObject InputSceneScript;
 
@@ -44,10 +45,19 @@ public class TaleManager : MonoBehaviour
     public Color ColorActionSelected;
     public Color ColorActionUnselected;
     public GameObject BtnScript;
+    public GameObject BtnWholeText;
     public GameObject BtnMove;
     public GameObject BtnRotate;
     public GameObject BtnHeight;
     public ActionType actionType;
+
+    public GameObject BtnGenerateText;
+
+    public GameObject TextOnPanelWholeText;
+    public GameObject PlaceholderOnPanelWholeText;
+    public GameObject InputFieldOnPanelWholeText;
+    public GameObject ButtonOnPanelWholeText;
+    private int indexSceneOnWhichMoveText;
 
     public int LastSceneNumber;
 
@@ -79,6 +89,7 @@ public class TaleManager : MonoBehaviour
         PanelScenesManager.SetActive(false);
 
         BtnScriptBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
+        BtnWholeTextBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
 
         BtnBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
         BtnAdd.GetComponent<Button>().onClick.AddListener(BtnAddOnClick);
@@ -89,6 +100,7 @@ public class TaleManager : MonoBehaviour
         BtnRemoveLink.GetComponent<Button>().onClick.AddListener(BtnRemoveLinkClick);
 
         BtnScript.GetComponent<Button>().onClick.AddListener(BtnShowPanelScriptOnClick);
+        BtnWholeText.GetComponent<Button>().onClick.AddListener(BtnShowPanelWholeTextOnClick);
         BtnMove.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Move));
         BtnRotate.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Rotate));
         BtnHeight.GetComponent<Button>().onClick.AddListener(() => SetActionType(ActionType.Height));
@@ -213,6 +225,12 @@ public class TaleManager : MonoBehaviour
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelScript);
     }
 
+    public void BtnShowPanelWholeTextOnClick()
+    {
+        IsViewMode = true;
+        Utils.HideOtherPanels(GetComponent<MenuManager>().PanelWholeText);
+    }
+
     private void BtnBackOnClick()
     {
         IsViewMode = false;
@@ -241,6 +259,20 @@ public class TaleManager : MonoBehaviour
 
     public void ClearTale()
     {
+        ClearTaleWithoutClearObjectsForScene();
+
+        DrawPreviewSceneObjects drawerPreview = GetComponent<DrawPreviewSceneObjects>();
+        drawerPreview.ClearObjectsForScene();
+        foreach (Transform sc in drawerPreview.ContentScroll.transform)
+        {
+            Destroy(sc.gameObject);
+            Destroy(sc.gameObject.GetComponent<PreviewSceneObject>().sceneObject);
+        }
+        drawerPreview.ClearObjectsForScene();
+    }
+
+    public void ClearTaleWithoutClearObjectsForScene()
+    {
         Links = new Dictionary<int, List<int>>();
         SceneNames = new List<string>();
         SceneScripts = new List<string>();
@@ -262,19 +294,13 @@ public class TaleManager : MonoBehaviour
         Lines = new GameObject();
         Lines.transform.SetParent(PanelScenesGraph.transform);
 
-        DrawPreviewSceneObjects drawerPreview = GetComponent<DrawPreviewSceneObjects>();
-        drawerPreview.ClearObjectsForScene();
-        foreach (Transform sc in drawerPreview.ContentScroll.transform)
-        {
-            Destroy(sc.gameObject);
-            Destroy(sc.gameObject.GetComponent<PreviewSceneObject>().sceneObject);
-        }
-        drawerPreview.ClearObjectsForScene();
+        BtnGenerateText.GetComponent<Button>().interactable = false;
+        BtnWholeText.SetActive(false);
     }
 
     public void BtnAddOnClick()
     {
-        CreateScene("Scene " + LastSceneNumber);
+        CreateScene("Сцена " + LastSceneNumber);
         SceneNames.Add("");
         SceneScripts.Add("");
     }
@@ -350,8 +376,8 @@ public class TaleManager : MonoBehaviour
 
     private void RenderScene(int id = 1)
     {
-        TextSceneNumber.GetComponent<Text>().text = "Scene " + id;
-        TextScriptSceneNumber.GetComponent<Text>().text = "Scene " + id;
+        TextSceneNumber.GetComponent<Text>().text = "Сцена " + id;
+        TextScriptSceneNumber.GetComponent<Text>().text = "Сцена " + id;
     }
 
     internal void SelectSceneBtn(ButtonScene buttonScene)
@@ -375,5 +401,45 @@ public class TaleManager : MonoBehaviour
     public void OnInputSceneScriptChanged()
     {
         SceneScripts[CurrentSceneId - 1] = InputSceneScript.GetComponent<InputField>().text;
+        SetOnWhichSceneMoveText();
+    }
+
+    public void ActivateBtnGenerateText()
+    {
+        BtnGenerateText.GetComponent<Button>().interactable = true;
+    }
+
+    public void ActivateBtnWholeText()
+    {
+        BtnWholeText.SetActive(true);
+    }
+
+    public void SetOnWhichSceneMoveText()
+    {
+        for (int i = 0; i < SceneScripts.Count; i++)
+        {
+            if (SceneScripts[i].Equals(""))
+            {
+                TextOnPanelWholeText.GetComponent<Text>().text = $"Скопируйте часть текста для сцены \"{i + 1}. {SceneNames[i]}\" сюда:";
+                PlaceholderOnPanelWholeText.GetComponent<Text>().text = $"Текст для сцены \"{i + 1}. {SceneNames[i]}\"";
+                indexSceneOnWhichMoveText = i;
+                InputFieldOnPanelWholeText.GetComponent<InputField>().interactable = true;
+                ButtonOnPanelWholeText.GetComponent<Button>().interactable = true;
+                return;
+            }
+        }
+
+        TextOnPanelWholeText.GetComponent<Text>().text = "Текст во всех сценах заполнен";
+        PlaceholderOnPanelWholeText.GetComponent<Text>().text = "";
+        InputFieldOnPanelWholeText.GetComponent<InputField>().interactable = false;
+        ButtonOnPanelWholeText.GetComponent<Button>().interactable = false;
+    }
+
+    public void MoveText()
+    {
+        SceneScripts[indexSceneOnWhichMoveText] = InputFieldOnPanelWholeText.GetComponent<InputField>().text;
+        UpdateVisibleScenes();
+        InputFieldOnPanelWholeText.GetComponent<InputField>().text = "";
+        SetOnWhichSceneMoveText();
     }
 }

@@ -16,18 +16,19 @@ namespace Assets.Scripts.ProppMorphology
             var characterFunctions = new List<ICharacterFunction>();
 
             TaleKind taleKind;
-            string initialPlace = null;
-            string antagonistsPlace = null;
+            string initialPlace;
+            string antagonistsPlace;
             string intermediatePlace = "Лес";
+            string finalLocation;
 
             var characters = new Characters();
 
-            bool swanGeeseAreAntagonist = false;
             if (rnd.Next(0, 2) == 1)
             {
                 taleKind = TaleKind.SnakeKidnapsPrincess;
                 initialPlace = "Царский сад";
                 antagonistsPlace = "Логово трёхглавого змея";
+                finalLocation = "Царский дворец";
 
                 int randomValue = rnd.Next(0, 4);
                 if (randomValue == 0)
@@ -36,7 +37,7 @@ namespace Assets.Scripts.ProppMorphology
                 }
                 else if (randomValue == 1)
                 {
-                    characters.Hero = "Фролка-сидень";
+                    characters.Hero = "Фролка";
                 }
                 else if (randomValue == 2)
                 {
@@ -56,11 +57,15 @@ namespace Assets.Scripts.ProppMorphology
             {
                 initialPlace = "Двор дома";
                 antagonistsPlace = "Избушка на курьих ножках";
+                finalLocation = "Дом";
+
                 if (rnd.Next(0, 2) == 1)
                 {
                     taleKind = TaleKind.SisterSavesBrotherFromBabaYaga;
                     characters.Hero = "Сестра";
                     characters.Victim = "Братец";
+                    characters.Antagonist1 = "Гуси-лебеди";
+                    characters.Antagonist2 = "Баба-яга";
                 }
                 else
                 {
@@ -73,20 +78,11 @@ namespace Assets.Scripts.ProppMorphology
                     {
                         characters.Hero = "Ивашко";
                     }
-                }
-
-                characters.Parent = "Старик и старушка";
-                if (rnd.Next(0, 2) == 1)
-                {
                     characters.Antagonist1 = "Баба-яга";
                     characters.Antagonist2 = "Дочь бабы-яги";
                 }
-                else
-                {
-                    swanGeeseAreAntagonist = true;
-                    characters.Antagonist1 = "Гуси-лебеди";
-                    characters.Antagonist2 = "Баба-яга";
-                }
+
+                characters.Parent = "Старик и старушка";
             }
 
             characterFunctions.Add(new InitialSituationFunction(taleKind, initialPlace, characters));
@@ -98,103 +94,128 @@ namespace Assets.Scripts.ProppMorphology
                 characterFunctions.Add(new CounteractionDecisionFunction(taleKind, initialPlace, characters));
             }
 
-            var departureFunction = new DepartureFunction(taleKind, antagonistsPlace, characters);
-            characterFunctions.Add(departureFunction);
-
+            bool itWasTravelGuide = false;
             if (taleKind != TaleKind.BoyEscapesFromBabaYaga)
             {
                 if (rnd.Next(0, 2) == 1)
                 {
+                    itWasTravelGuide = true;
+                }
+
+                /*if (rnd.Next(0, 2) == 1)
+                {
                     departureFunction.Place = intermediatePlace;
                     characterFunctions.Add(new TestByDonorFunction { Place = intermediatePlace });
                     characterFunctions.Add(new PassingTestFunction { Place = intermediatePlace });
-                    characterFunctions.Add(new MagicAgentTransferFunction { Place = intermediatePlace });
+                    if (rnd.Next(0, 2) == 1)
+                    {
+                        characterFunctions.Add(new MagicAgentTransferFunction { Place = intermediatePlace });
+                    }
+                    else
+                    {
+                        if (taleKind == TaleKind.SnakeKidnapsPrincess)
+                        {
+                            characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Старик"));
+                        }
+                        else
+                        {
+                            characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Ёжик"));
+                        }
+                    }
                 }
                 else if (rnd.Next(0, 2) == 1)
                 {
                     departureFunction.Place = intermediatePlace;
-                    characterFunctions.Add(new MagicAgentTransferFunction { Place = intermediatePlace });
+                    if (rnd.Next(0, 2) == 1)
+                    {
+                        characterFunctions.Add(new MagicAgentTransferFunction { Place = intermediatePlace });
+                    }
+                    else
+                    {
+                        if (taleKind == TaleKind.SnakeKidnapsPrincess)
+                        {
+                            characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Старик"));
+                        }
+                        else
+                        {
+                            characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Ёжик"));
+                        }
+                    }
+                }
+
+                if (departureFunction.Place == intermediatePlace) // И если не было путеводительства
+                {
+                    characterFunctions.Add(new DepartureFunction(taleKind, antagonistsPlace, characters));
+                }
+                */
+            }
+
+            if (!itWasTravelGuide)
+            {
+                characterFunctions.Add(new DepartureFunction(taleKind, antagonistsPlace, characters, itWasTravelGuide));
+            }
+            else
+            {
+                characterFunctions.Add(new DepartureFunction(taleKind, intermediatePlace, characters, itWasTravelGuide));
+                if (taleKind == TaleKind.SnakeKidnapsPrincess)
+                {
+                    characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Старик"));
+                }
+                else
+                {
+                    characterFunctions.Add(new TravelGuideFunction(taleKind, antagonistsPlace, characters, "Ёжик"));
                 }
             }
 
-            if (taleKind != TaleKind.BoyEscapesFromBabaYaga && rnd.Next(0, 2) == 1)
-            {
-                departureFunction.Place = intermediatePlace;
-                characterFunctions.Add(new TravelGuideFunction { Place = antagonistsPlace });
-            }
-            else if (departureFunction.Place == intermediatePlace)
-            {
-                characterFunctions.Add(new DepartureFunction(taleKind, antagonistsPlace, characters));
-            }
-
-            if (taleKind == TaleKind.SnakeKidnapsPrincess)
+            if (taleKind != TaleKind.SisterSavesBrotherFromBabaYaga)
             {
                 characterFunctions.Add(new StruggleFunction(taleKind, antagonistsPlace, characters));
                 characterFunctions.Add(new VictoryFunction(taleKind, antagonistsPlace, characters));
 
-                characterFunctions.Add(new TroublesLiquidationFunction(taleKind, antagonistsPlace, characters));
-
-                if (rnd.Next(0, 2) == 1)
-                {
-                    characterFunctions.Add(new PursuitFunction { Place = intermediatePlace, ActingCharacter = characters.Antagonist2, AdditionalCharacter1 = characters.Hero, AdditionalCharacter2 = characters.Victim });
-                    characterFunctions.Add(new RescueFromPursuitFunction { Place = "Кузница", ActingCharacter = "Кузнец", AdditionalCharacter1 = characters.Hero, AdditionalCharacter2 = characters.Antagonist2 });
-                }
-            }
-            else
-            {
-                bool hasBeenStruggle = false;
-                if (rnd.Next(0, 2) == 1)
-                {
-                    hasBeenStruggle = true;
-                    characterFunctions.Add(new StruggleFunction(taleKind, antagonistsPlace, characters));
-                    characterFunctions.Add(new VictoryFunction(taleKind, antagonistsPlace, characters));
-                }
-
-                bool addingPursuit = false;
-                if (rnd.Next(0, 2) == 1)
-                {
-                    addingPursuit = true;
-                }
-                else if (!hasBeenStruggle)
-                {
-                    if (rnd.Next(0, 2) == 1)
-                    {
-                        characterFunctions.Add(new StruggleFunction(taleKind, antagonistsPlace, characters));
-                        characterFunctions.Add(new VictoryFunction(taleKind, antagonistsPlace, characters));
-                    }
-                    else
-                    {
-                        addingPursuit = true;
-                    }
-                }
-
-                if (taleKind == TaleKind.SisterSavesBrotherFromBabaYaga)
+                if (taleKind == TaleKind.SnakeKidnapsPrincess)
                 {
                     characterFunctions.Add(new TroublesLiquidationFunction(taleKind, antagonistsPlace, characters));
                 }
 
-                if (addingPursuit)
+                if (taleKind == TaleKind.BoyEscapesFromBabaYaga)
                 {
-                    characterFunctions.Add(new PursuitFunction { Place = intermediatePlace, ActingCharacter = characters.Antagonist1, AdditionalCharacter1 = characters.Hero, AdditionalCharacter2 = characters.Victim });
-                    characterFunctions.Add(new RescueFromPursuitFunction { Place = intermediatePlace });
+                    characterFunctions.Add(new PursuitFunction(taleKind, intermediatePlace, characters));
+                    characterFunctions.Add(new RescueFromPursuitFunction(taleKind, intermediatePlace, characters, "Гусь-лебедь"));
                 }
-            }
-
-            string finalLocation;
-            if (taleKind == TaleKind.SnakeKidnapsPrincess)
-            {
-                finalLocation = "Царский дворец";
+                else if (rnd.Next(0, 2) == 1)
+                {
+                    characterFunctions.Add(new PursuitFunction(taleKind, intermediatePlace, characters));
+                    characterFunctions.Add(new RescueFromPursuitFunction(taleKind, "Кузница", characters, "Кузнец"));
+                }
             }
             else
             {
-                finalLocation = "Дом";
+                /*bool itWasStruggle = false;
+                if (rnd.Next(0, 2) == 1)
+                {
+                    itWasStruggle = true;
+                    characterFunctions.Add(new StruggleFunction(taleKind, antagonistsPlace, characters));
+                    characterFunctions.Add(new VictoryFunction(taleKind, antagonistsPlace, characters));
+                }*/
+
+                characterFunctions.Add(new TroublesLiquidationFunction(taleKind, antagonistsPlace, characters));
+
+                characterFunctions.Add(new PursuitFunction(taleKind, intermediatePlace, characters));
+                characterFunctions.Add(new RescueFromPursuitFunction(taleKind, intermediatePlace, characters, "Яблоня"));
             }
 
-            characterFunctions.Add(new ReturnFunction { Place = finalLocation });
+            characterFunctions.Add(new ReturnFunction(taleKind, finalLocation, characters));
 
-            if (taleKind == TaleKind.SnakeKidnapsPrincess && rnd.Next(0, 2) == 1)
+            if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
-                characterFunctions.Add(new RewardingFunction { Place = finalLocation });
+                if (true/*rnd.Next(0, 2) == 1*/)
+                {
+                    characterFunctions.Add(new RewardingFunction(taleKind, finalLocation, characters, true));
+                }
+                else
+                {
+                    //characterFunctions.Add(new RewardingFunction(taleKind, finalLocation, characters, false));
+                }
             }
 
             return characterFunctions;

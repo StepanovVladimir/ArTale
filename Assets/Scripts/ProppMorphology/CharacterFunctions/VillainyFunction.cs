@@ -20,11 +20,33 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             {
                 AdditionalCharacter1 = characters.Hero;
             }
+
+            if (taleKind == TaleKind.SnakeKidnapsPrincess)
+            {
+                StorylineString = "Когда царевна отлучилась погулять в саду, трёхглавый змей прилетает и похищает её";
+            }
+            else if (taleKind == TaleKind.SisterSavesBrotherFromBabaYaga)
+            {
+                StorylineString = "Когда родители отлучились, гуси-лебеди налетают и похищают мальчика во дворе";
+            }
+            else
+            {
+                if (characters.Hero.Equals("Ивашко"))
+                {
+                    StorylineString = "Когда родители отлучились, Баба-яга похищает Ивашку, притворившись его мамой";
+                }
+                else
+                {
+                    StorylineString = "Когда родители отлучились, Баба-яга похищает Терешечку, притворившись его мамой";
+                }
+            }
         }
 
         public string Name { get; } = "Вредительство";
 
-        public string Place { get; set; }
+        public string StorylineString { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

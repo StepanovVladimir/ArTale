@@ -36,9 +36,13 @@ public class MenuManager : MonoBehaviour
     public GameObject ButtonOk;
     public GameObject LabelMessage;
 
+    public GameObject PanelSelection;
+    public GameObject LabelSelection;
+
     public GameObject BtnRunView;
     public GameObject PanelTale;
     public GameObject PanelScript;
+    public GameObject PanelWholeText;
     public GameObject PanelTaleView;
 
     private TaleModel _taleModel;
@@ -75,6 +79,24 @@ public class MenuManager : MonoBehaviour
         _taleModel = new TaleModel(GetComponent<TaleManager>());
 
         UpdateScrollLoadTale();
+
+        /*AnimationClip[] animationClips;
+        var i = new Siccity.GLTFUtility.ImportSettings();
+        i.useLegacyClips = true;
+        GameObject model = Siccity.GLTFUtility.Importer.LoadFromFile(Application.persistentDataPath + "/Bee.glb", i, out animationClips);
+        model.AddComponent<BoxCollider>();
+        Debug.Log("animationClips " + animationClips.Length + " " + animationClips[0].name);
+
+        Animation animation = model.AddComponent<Animation>();
+        animationClips[0].legacy = true;
+        animation.AddClip(animationClips[0], animationClips[0].name);
+        animation.clip = animation.GetClip(animationClips[0].name);
+        animation.wrapMode = WrapMode.Loop;
+        animation.Play();*/
+
+        //PlayableGraph playable = new PlayableGraph();
+        //var animator = model.AddComponent<Animator>();
+        //AnimationPlayableUtilities.PlayClip(animator, animationClips[2], out playable);
     }
 
     private void RunView()
@@ -215,6 +237,23 @@ public class MenuManager : MonoBehaviour
     {
         PanelMessage.SetActive(true);
         LabelMessage.GetComponent<Text>().text = v;
+    }
+
+    public void ShowSelection()
+    {
+        PanelSelection.SetActive(true);
+    }
+
+    public void CloseSelection()
+    {
+        PanelSelection.SetActive(false);
+    }
+
+    public void DeleteTale()
+    {
+        _taleModel.Delete();
+        UpdateScrollLoadTale();
+        Utils.HideOtherPanels(PanelMainMenu);
     }
 
     private void OnClickCopyLink()

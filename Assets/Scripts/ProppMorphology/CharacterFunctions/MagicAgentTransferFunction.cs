@@ -10,6 +10,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public string Name { get; } = "Передача волшебного средства";
 
+        public string StorylineString { get; }
+
         public string Place { get; set; }
 
         public string ActingCharacter { get; set; }

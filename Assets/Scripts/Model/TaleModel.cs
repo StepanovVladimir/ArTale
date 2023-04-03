@@ -82,6 +82,12 @@ namespace Assets.Scripts
             WriteFile(tale, script);
         }
 
+        public void Delete()
+        {
+            Directory.Delete(Utils.PathSaves + TaleName, true);
+            _taleManager.ClearTale();
+        }
+
         private Tale ReadFile()
         {
             string pathTaleRoot = Utils.PathSaves + TaleName + "/";

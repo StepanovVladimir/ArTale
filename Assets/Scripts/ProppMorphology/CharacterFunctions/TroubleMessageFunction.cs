@@ -8,23 +8,27 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 {
     class TroubleMessageFunction : ICharacterFunction
     {
-        public TroubleMessageFunction(TaleKind taleKind, string place, Characters characters)
+        public TroubleMessageFunction(TaleKind taleKind, string place, Characters characters, bool swanGeeseAreAntagonist = false)
         {
             Place = place;
             AdditionalCharacter1 = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
+                StorylineString = "Царь сообщает всем о беде";
                 ActingCharacter = characters.Parent;
             }
             else
             {
+                StorylineString = "Сестра видит, что братца нету, а вдалеке улетают гуси-лебеди";
                 ActingCharacter = characters.Antagonist1;
             }
         }
 
         public string Name { get; } = "Сообщение о беде";
 
-        public string Place { get; set; }
+        public string StorylineString { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

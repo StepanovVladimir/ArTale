@@ -13,9 +13,19 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             Place = place;
             ActingCharacter = characters.Hero;
             AdditionalCharacter1 = characters.Victim;
+            if (taleKind == TaleKind.SnakeKidnapsPrincess)
+            {
+                StorylineString = $"{characters.Hero} освобождает царевну";
+            }
+            else
+            {
+                StorylineString = "Сестра, подкравшись, освобождает братца от бабы-яги";
+            }
         }
 
         public string Name { get; } = "Ликвидация беды";
+
+        public string StorylineString { get; }
 
         public string Place { get; set; }
 
