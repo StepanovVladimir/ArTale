@@ -9,10 +9,11 @@ public class DrawPreviewSceneObjects : MonoBehaviour
     public GameObject ObjectsForScene;
     public GameObject ContentScroll;
     public GameObject ContentScrollItem;
+    public List<Transform> StandartObjects;
 
     void Start()
     {
-        RenderObjectsPreview();
+        //RenderObjectsPreview();
     }
 
     public void ClearObjectsForScene()
@@ -44,6 +45,17 @@ public class DrawPreviewSceneObjects : MonoBehaviour
         foreach (Transform child2 in ContentScroll.transform)
         {
             Destroy(child2.gameObject);
+        }
+
+        foreach (Transform transform in StandartObjects)
+        {
+            Texture2D img = RuntimePreviewGenerator.GenerateModelPreview(transform);
+            GameObject obj = Instantiate(ContentScrollItem, ContentScroll.transform);
+            obj.transform.localPosition = changeY(obj.transform.localPosition, obj.transform.localPosition.y - i * imageHeight);
+            obj.GetComponent<RawImage>().texture = img;
+            obj.GetComponent<PreviewSceneObject>().sceneObject = transform.gameObject;
+
+            i++;
         }
 
         foreach (Transform child in ObjectsForScene.transform)

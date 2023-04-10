@@ -24,6 +24,7 @@ public class GenerateText : MonoBehaviour
     }
 
     public InputField inputField;
+    public GameObject panelWait;
 
     public string Message { get; set; }
 
@@ -40,6 +41,7 @@ public class GenerateText : MonoBehaviour
             messages = new[] { new { role = "user", content = Message } }
         };
 
+        panelWait.SetActive(true);
         var responseContent = await http.PostAsync("https://api.openai.com/v1/chat/completions", new StringContent(JsonConvert.SerializeObject(jsonContent), Encoding.UTF8, "application/json"));
         var resContext = await responseContent.Content.ReadAsStringAsync();
 
