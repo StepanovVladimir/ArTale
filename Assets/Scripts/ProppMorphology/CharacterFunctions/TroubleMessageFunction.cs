@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public TroubleMessageFunction(TaleKind taleKind, string place, Characters characters, bool swanGeeseAreAntagonist = false)
         {
+            SceneIndex = 2;
             Place = place;
             AdditionalCharacter1 = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
@@ -27,6 +28,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
         public string Name { get; } = "Сообщение о беде";
 
         public string StorylineString { get; }
+
+        public int SceneIndex { get; }
 
         public string Place { get; }
 

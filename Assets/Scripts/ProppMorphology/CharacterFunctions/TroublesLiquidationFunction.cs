@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public TroublesLiquidationFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 8;
             Place = place;
             ActingCharacter = characters.Hero;
             AdditionalCharacter1 = characters.Victim;
@@ -27,12 +28,14 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
 
-        public string ActingCharacter { get; set; }
+        public string Place { get; }
 
-        public string AdditionalCharacter1 { get; set; }
+        public string ActingCharacter { get; }
 
-        public string AdditionalCharacter2 { get; set; }
+        public string AdditionalCharacter1 { get; }
+
+        public string AdditionalCharacter2 { get; }
     }
 }

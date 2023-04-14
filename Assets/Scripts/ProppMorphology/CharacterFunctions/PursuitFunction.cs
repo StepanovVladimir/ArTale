@@ -10,25 +10,26 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public PursuitFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 9;
             Place = place;
             AdditionalCharacter1 = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
                 if (characters.Hero.Equals("Иван"))
                 {
-                    StorylineString = "Змеиха летит в погоню за Иваном и царевной";
+                    StorylineString = "Змеиха летит в погоню за Иваном и царевной, которые прячутся в кузнице";
                 }
                 else if (characters.Hero.Equals("Фролка"))
                 {
-                    StorylineString = "Змеиха летит в погоню за Фролкой и царевной";
+                    StorylineString = "Змеиха летит в погоню за Фролкой и царевной, которые прячутся в кузнице";
                 }
                 else if (characters.Hero.Equals("Зорька"))
                 {
-                    StorylineString = "Змеиха летит в погоню за Зорькой и царевной";
+                    StorylineString = "Змеиха летит в погоню за Зорькой и царевной, которые прячутся в кузнице";
                 }
                 else
                 {
-                    StorylineString = "Змеиха летит в погоню за Никитой Кожемякой и царевной";
+                    StorylineString = "Змеиха летит в погоню за Никитой Кожемякой и царевной, которые прячутся в кузнице";
                 }
                 ActingCharacter = characters.Antagonist2;
                 AdditionalCharacter2 = characters.Victim;
@@ -57,7 +58,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

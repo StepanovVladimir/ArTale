@@ -63,8 +63,14 @@ public class TaleManager : MonoBehaviour
 
     public GameObject CurrentMoveObj = null;
 
+    public List<GameObject> Scenes;
+
+    [HideInInspector]
     public List<string> SceneNames;
+    [HideInInspector]
     public List<string> SceneScripts;
+    [HideInInspector]
+    public List<string> SceneDescriptions;
 
     public bool IsViewMode { get; set; } = false;
 
@@ -307,10 +313,20 @@ public class TaleManager : MonoBehaviour
 
     public ButtonScene CreateScene(string btnName)
     {
+        GameObject scene = Instantiate(new GameObject(), ImgTarget.transform);
+        return CreateSceneImpl(btnName, scene);
+    }
+
+    public ButtonScene CreateScene(string btnName, int sceneIndex)
+    {
+        GameObject scene = Instantiate(Scenes[sceneIndex], ImgTarget.transform);
+        return CreateSceneImpl(btnName, scene);
+    }
+
+    private ButtonScene CreateSceneImpl(string btnName, GameObject scene)
+    {
         GameObject btnScene = Instantiate(TmplBtnScene, PanelScenesGraph.transform);
         btnScene.GetComponentInChildren<Text>().text = btnName;
-
-        GameObject scene = Instantiate(new GameObject(), ImgTarget.transform);
 
         bool currentSceneIsNull = CurrentScene == null;
 
@@ -339,7 +355,6 @@ public class TaleManager : MonoBehaviour
         Debug.Log("SelectedId " + SelectedBtnScene.SceneId);
         CurrentScene = SelectedBtnScene.Scene;
         CurrentSceneId = SelectedBtnScene.SceneId;
-        RenderScene(SelectedBtnScene.SceneId);
         UpdateVisibleScenes();
         foreach (Transform sceneBtn in PanelScenesGraph.transform)
         {
@@ -355,6 +370,7 @@ public class TaleManager : MonoBehaviour
 
     public void UpdateVisibleScenes()
     {
+        RenderScene(SelectedBtnScene.SceneId);
         foreach (Transform scene in ImgTarget.transform)
         {
             scene.gameObject.SetActive(scene.gameObject == SelectedBtnScene.Scene);
@@ -421,7 +437,7 @@ public class TaleManager : MonoBehaviour
             if (SceneScripts[i].Equals(""))
             {
                 TextOnPanelWholeText.GetComponent<Text>().text = $"Скопируйте часть текста для сцены \"{i + 1}. {SceneNames[i]}\" сюда:";
-                PlaceholderOnPanelWholeText.GetComponent<Text>().text = $"Текст для сцены \"{i + 1}. {SceneNames[i]}\"";
+                PlaceholderOnPanelWholeText.GetComponent<Text>().text = $"Часть текста о том, как \"{SceneDescriptions[i]}\"";
                 indexSceneOnWhichMoveText = i;
                 InputFieldOnPanelWholeText.GetComponent<InputField>().interactable = true;
                 ButtonOnPanelWholeText.GetComponent<Button>().interactable = true;
@@ -441,5 +457,10 @@ public class TaleManager : MonoBehaviour
         UpdateVisibleScenes();
         InputFieldOnPanelWholeText.GetComponent<InputField>().text = "";
         SetOnWhichSceneMoveText();
+    }
+
+    public GameObject InstantiateObj(GameObject gameObject)
+    {
+        return Instantiate(gameObject);
     }
 }

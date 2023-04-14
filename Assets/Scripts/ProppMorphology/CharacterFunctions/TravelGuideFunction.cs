@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public TravelGuideFunction(TaleKind taleKind, string place, Characters characters, string helper)
         {
+            SceneIndex = 5;
             Place = place;
             ActingCharacter = helper;
             AdditionalCharacter1 = characters.Hero;
@@ -17,19 +18,19 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             {
                 if (characters.Hero.Equals("Иван"))
                 {
-                    StorylineString = "Старец указывает путь Ивану в логово трёхглавого змея";
+                    StorylineString = "Старец указывает путь Ивану в логово змея";
                 }
                 else if (characters.Hero.Equals("Фролка"))
                 {
-                    StorylineString = "Старец указывает путь Фролке в логово трёхглавого змея";
+                    StorylineString = "Старец указывает путь Фролке в логово змея";
                 }
                 else if (characters.Hero.Equals("Зорька"))
                 {
-                    StorylineString = "Старец указывает путь Зорьке в логово трёхглавого змея";
+                    StorylineString = "Старец указывает путь Зорьке в логово змея";
                 }
                 else
                 {
-                    StorylineString = "Старец указывает путь Никите Кожемяке в логово трёхглавого змея";
+                    StorylineString = "Старец указывает путь Никите Кожемяке в логово змея";
                 }
             }
             else
@@ -42,7 +43,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

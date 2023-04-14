@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public DepartureFunction(TaleKind taleKind, string place, Characters characters, bool itWasTravelGuide)
         {
+            SceneIndex = 4;
             Place = place;
             if (taleKind != TaleKind.BoyEscapesFromBabaYaga)
             {
@@ -25,7 +26,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             {
                 if (!itWasTravelGuide)
                 {
-                    StorylineString = $"{characters.Hero} отправляется в логово трёхглавого змея";
+                    StorylineString = $"{characters.Hero} отправляется в логово змея";
                 }
                 else
                 {
@@ -60,7 +61,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

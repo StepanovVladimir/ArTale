@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public CounteractionDecisionFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 3;
             Place = place;
             ActingCharacter = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
@@ -26,6 +27,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
         public string Name { get; } = "Решение противодействовать";
 
         public string StorylineString { get; }
+
+        public int SceneIndex { get; }
 
         public string Place { get; }
 

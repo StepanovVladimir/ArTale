@@ -36,12 +36,13 @@ public class GenerateScenes : MonoBehaviour
 
             //Debug.Log(s);
 
-            ButtonScene bs = taleManager.CreateScene($"{i}. {f.Name}");
+            ButtonScene bs = taleManager.CreateScene($"{i}. {f.Name}", f.SceneIndex);
             bs.SceneId = i;
             bs.gameObject.transform.position = new Vector3(xPosition, yPosition, 0);
 
             taleManager.SceneNames.Add(f.Name);
             taleManager.SceneScripts.Add("");
+            taleManager.SceneDescriptions.Add(f.StorylineString);
 
             generateText.Message += $"{f.StorylineString}\n";
 

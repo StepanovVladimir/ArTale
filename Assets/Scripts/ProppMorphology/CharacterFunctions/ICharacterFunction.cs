@@ -12,6 +12,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
+        public int SceneIndex { get; }
+
         public string Place { get; }
         public string ActingCharacter { get; }
         public string AdditionalCharacter1 { get; }

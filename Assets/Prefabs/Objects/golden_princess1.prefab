@@ -2627,6 +2627,7 @@ GameObject:
   - component: {fileID: 8254199326136902339}
   - component: {fileID: 5866666021909216657}
   - component: {fileID: -437887537210491253}
+  - component: {fileID: -311985091297365965}
   m_Layer: 0
   m_Name: golden_princess1
   m_TagString: Untagged
@@ -2643,7 +2644,7 @@ Transform:
   m_GameObject: {fileID: 5767058216462061935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children:
   - {fileID: 3698206242454999301}
   - {fileID: -126405692798277137}
@@ -2669,7 +2670,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b58a28b2f8952fd42a7d83cd7f3d43d4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2688,6 +2689,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4, y: 2.55, z: 1}
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!114 &-311985091297365965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767058216462061935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b3c1e4b4f4cd640a853399f7607033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelFilename: princess_walk
 --- !u!1 &5825816759829592357
 GameObject:
   m_ObjectHideFlags: 0

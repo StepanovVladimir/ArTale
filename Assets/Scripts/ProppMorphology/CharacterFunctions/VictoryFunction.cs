@@ -10,11 +10,12 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public VictoryFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 7;
             Place = place;
             ActingCharacter = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
-                StorylineString = $"{characters.Hero} побеждает трёхглавого змея";
+                StorylineString = $"{characters.Hero} побеждает змея";
                 AdditionalCharacter1 = characters.Antagonist1;
                 AdditionalCharacter2 = characters.Victim;
             }
@@ -35,7 +36,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

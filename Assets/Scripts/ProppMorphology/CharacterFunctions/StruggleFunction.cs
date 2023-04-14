@@ -10,25 +10,26 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public StruggleFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 6;
             Place = place;
             AdditionalCharacter1 = characters.Hero;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
                 if (characters.Hero.Equals("Иван"))
                 {
-                    StorylineString = "Трёхглавый змей борется с Иваном";
+                    StorylineString = "Змей борется с Иваном";
                 }
                 else if (characters.Hero.Equals("Фролка"))
                 {
-                    StorylineString = "Трёхглавый змей борется с Фролкой";
+                    StorylineString = "Змей борется с Фролкой";
                 }
                 else if (characters.Hero.Equals("Зорька"))
                 {
-                    StorylineString = "Трёхглавый змей борется с Зорькой";
+                    StorylineString = "Змей борется с Зорькой";
                 }
                 else
                 {
-                    StorylineString = "Трёхглавый змей борется с Никитой Кожемякой";
+                    StorylineString = "Змей борется с Никитой Кожемякой";
                 }
                 ActingCharacter = characters.Antagonist1;
                 AdditionalCharacter2 = characters.Victim;
@@ -57,7 +58,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

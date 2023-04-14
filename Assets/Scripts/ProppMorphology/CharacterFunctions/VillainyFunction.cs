@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public VillainyFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 1;
             Place = place;
             ActingCharacter = characters.Antagonist1;
             if (taleKind != TaleKind.BoyEscapesFromBabaYaga)
@@ -23,7 +24,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
             {
-                StorylineString = "Когда царевна отлучилась погулять в саду, трёхглавый змей прилетает и похищает её";
+                StorylineString = "Когда царевна отлучилась погулять в саду, змей прилетает и похищает её";
             }
             else if (taleKind == TaleKind.SisterSavesBrotherFromBabaYaga)
             {
@@ -45,6 +46,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
         public string Name { get; } = "Вредительство";
 
         public string StorylineString { get; }
+
+        public int SceneIndex { get; }
 
         public string Place { get; }
 

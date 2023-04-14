@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public RescueFromPursuitFunction(TaleKind taleKind, string place, Characters characters, string helper)
         {
+            SceneIndex = 10;
             Place = place;
             ActingCharacter = helper;
             AdditionalCharacter1 = characters.Hero;
@@ -17,19 +18,19 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             {
                 if (characters.Hero.Equals("Иван"))
                 {
-                    StorylineString = "Кузнец в кузнице помогает Ивану справится со змеихой";
+                    StorylineString = "Кузнец помогает Ивану справится со змеихой";
                 }
                 else if (characters.Hero.Equals("Фролка"))
                 {
-                    StorylineString = "Кузнец в кузнице помогает Фролке справится со змеихой";
+                    StorylineString = "Кузнец помогает Фролке справится со змеихой";
                 }
                 else if (characters.Hero.Equals("Зорька"))
                 {
-                    StorylineString = "Кузнец в кузнице помогает Зорьке справится со змеихой";
+                    StorylineString = "Кузнец помогает Зорьке справится со змеихой";
                 }
                 else
                 {
-                    StorylineString = "Кузнец в кузнице помогает Никите Кожемяке справится со змеихой";
+                    StorylineString = "Кузнец помогает Никите Кожемяке справится со змеихой";
                 }
                 AdditionalCharacter2 = characters.Antagonist2;
             }
@@ -56,7 +57,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

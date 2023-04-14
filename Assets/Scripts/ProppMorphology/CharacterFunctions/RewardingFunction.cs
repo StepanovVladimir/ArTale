@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public RewardingFunction(TaleKind taleKind, string place, Characters characters, bool rewardIsMarriage)
         {
+            SceneIndex = 12;
             Place = place;
             ActingCharacter = characters.Parent;
             AdditionalCharacter1 = characters.Hero;
@@ -44,7 +45,9 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
 
         public string StorylineString { get; }
 
-        public string Place { get; set; }
+        public int SceneIndex { get; }
+
+        public string Place { get; }
 
         public string ActingCharacter { get; }
 

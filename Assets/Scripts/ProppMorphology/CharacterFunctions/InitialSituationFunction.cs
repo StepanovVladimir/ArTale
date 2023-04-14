@@ -10,6 +10,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
     {
         public InitialSituationFunction(TaleKind taleKind, string place, Characters characters)
         {
+            SceneIndex = 0;
             Place = place;
             ActingCharacter = characters.Parent;
             if (taleKind == TaleKind.SnakeKidnapsPrincess)
@@ -33,6 +34,8 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
         public string Name { get; } = "Начальная ситуация";
 
         public string StorylineString { get; }
+
+        public int SceneIndex { get; }
 
         public string Place { get; }
 

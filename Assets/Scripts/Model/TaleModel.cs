@@ -281,7 +281,19 @@ namespace Assets.Scripts
 
         private GameObject UnserializeObj(Obj obj, string pathModels)
         {
-            GameObject objModel = CreateObjFromFile(pathModels + obj.modelFilename);
+            GameObject objModel;
+            DrawPreviewSceneObjects drawerPreview = _taleManager.GetComponent<DrawPreviewSceneObjects>();
+            Debug.Log("YA TUTA");
+            if (drawerPreview.StandartObjectsDict.ContainsKey(obj.modelFilename))
+            {
+                Debug.Log("YES");
+                objModel = _taleManager.InstantiateObj(drawerPreview.StandartObjectsDict[obj.modelFilename].gameObject);
+            }
+            else
+            {
+                Debug.Log("NO");
+                objModel = CreateObjFromFile(pathModels + obj.modelFilename);
+            }
 
             objModel.transform.position = obj.position;
             objModel.transform.rotation = obj.rotation;

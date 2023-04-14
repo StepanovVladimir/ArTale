@@ -23,8 +23,8 @@ namespace Assets.Scripts.ProppMorphology
 
             var characters = new Characters();
 
-            if (rnd.Next(0, 2) == 1)
-            {
+            //if (rnd.Next(0, 2) == 1)
+            //{
                 taleKind = TaleKind.SnakeKidnapsPrincess;
                 initialPlace = "Царский сад";
                 antagonistsPlace = "Логово трёхглавого змея";
@@ -52,7 +52,7 @@ namespace Assets.Scripts.ProppMorphology
                 characters.Parent = "Царь";
                 characters.Antagonist1 = "Трёхглавый змей";
                 characters.Antagonist2 = "Змеиха";
-            }
+            /*}
             else
             {
                 initialPlace = "Двор дома";
@@ -83,7 +83,7 @@ namespace Assets.Scripts.ProppMorphology
                 }
 
                 characters.Parent = "Старик и старушка";
-            }
+            }*/
 
             characterFunctions.Add(new InitialSituationFunction(taleKind, initialPlace, characters));
             characterFunctions.Add(new VillainyFunction(taleKind, initialPlace, characters));

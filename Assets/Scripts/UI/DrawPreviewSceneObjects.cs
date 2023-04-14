@@ -10,10 +10,15 @@ public class DrawPreviewSceneObjects : MonoBehaviour
     public GameObject ContentScroll;
     public GameObject ContentScrollItem;
     public List<Transform> StandartObjects;
+    public Dictionary<string, Transform> StandartObjectsDict = new Dictionary<string, Transform>();
 
     void Start()
     {
         //RenderObjectsPreview();
+        foreach (Transform transform in StandartObjects)
+        {
+            StandartObjectsDict[transform.GetComponent<MoveObj>().ModelFilename] = transform;
+        }
     }
 
     public void ClearObjectsForScene()
