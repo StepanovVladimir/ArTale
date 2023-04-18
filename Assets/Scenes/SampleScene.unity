@@ -371,7 +371,7 @@ RectTransform:
   m_Father: {fileID: 201931656}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.55194604}
+  m_AnchorMin: {x: 0, y: 0.48193744}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &95678511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1520,7 +1520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64011d3637ec6b84ab946f7b400598df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 984574556}
   panelWait: {fileID: 856946409}
 --- !u!114 &220615403
 MonoBehaviour:
@@ -4901,7 +4900,7 @@ RectTransform:
   m_Father: {fileID: 281610650}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.3163243}
+  m_AnchorMin: {x: 0, y: 0.20950001}
   m_AnchorMax: {x: 1, y: 0.9999999}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -5645,8 +5644,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 88853523}
   m_HandleRect: {fileID: 88853522}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.44805396
+  m_Value: 1
+  m_Size: 0.5180625
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5776,7 +5775,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 1
+  m_LineType: 2
   m_HideMobileInput: 0
   m_CharacterValidation: 0
   m_CharacterLimit: 0
@@ -6669,7 +6668,6 @@ GameObject:
   - component: {fileID: 808596062}
   - component: {fileID: 808596061}
   - component: {fileID: 808596060}
-  - component: {fileID: 808596063}
   m_Layer: 5
   m_Name: ButtonScenes
   m_TagString: Untagged
@@ -6740,7 +6738,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 808596061}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1630981337}
+        m_TargetAssemblyTypeName: TaleManager, Assembly-CSharp
+        m_MethodName: BtnShowPanelScenesOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &808596061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6779,19 +6789,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808596058}
   m_CullTransparentMesh: 1
---- !u!114 &808596063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808596058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 068d494842f6d1548ab4d4fc1021afac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1179490430}
 --- !u!1 &815696447
 GameObject:
   m_ObjectHideFlags: 0
@@ -10931,7 +10928,6 @@ GameObject:
   - component: {fileID: 1140014103}
   - component: {fileID: 1140014102}
   - component: {fileID: 1140014101}
-  - component: {fileID: 1140014104}
   m_Layer: 5
   m_Name: ButtonMenu
   m_TagString: Untagged
@@ -11002,7 +10998,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1140014102}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1630981337}
+        m_TargetAssemblyTypeName: TaleManager, Assembly-CSharp
+        m_MethodName: BtnShowPanelMenuOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1140014102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11041,19 +11049,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140014099}
   m_CullTransparentMesh: 1
---- !u!114 &1140014104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140014099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 068d494842f6d1548ab4d4fc1021afac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1462869498}
 --- !u!1 &1179490430
 GameObject:
   m_ObjectHideFlags: 0
@@ -11215,7 +11210,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2144925731}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.10508107
+  m_Size: 0.12149998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15946,7 +15941,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 558247064}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6836756
+  m_Size: 0.7905
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16479,6 +16474,7 @@ MonoBehaviour:
   ImgTarget: {fileID: 2087780223}
   BtnScriptBack: {fileID: 1529515978}
   BtnWholeTextBack: {fileID: 1275932066}
+  BtnMenuBack: {fileID: 2056306058}
   InputSceneName: {fileID: 1793096750}
   InputSceneScript: {fileID: 873140540}
   BtnBack: {fileID: 944675462}
@@ -16508,8 +16504,6 @@ MonoBehaviour:
   ButtonOnPanelWholeText: {fileID: 538867159}
   LastSceneNumber: 0
   CurrentMoveObj: {fileID: 0}
-  SceneNames: []
-  SceneScripts: []
   Scenes:
   - {fileID: 2563628168476398707, guid: 1284ecf05b911da4faeaea095ed71282, type: 3}
   - {fileID: 2952096232549372798, guid: 7861fb157227187409f16fd387088a5b, type: 3}
@@ -16524,6 +16518,10 @@ MonoBehaviour:
   - {fileID: 456608514645417339, guid: 12697cf1f2dcdfa4ebe7d83404006c17, type: 3}
   - {fileID: 4725713151085294952, guid: ef37c518bee56904d8cbac9cc20a36fe, type: 3}
   - {fileID: 5431289347307395461, guid: c5e317e469cee6d40bff1f3a79da5ef5, type: 3}
+  WholeTextInputField: {fileID: 984574556}
+  SceneNames: []
+  SceneScripts: []
+  SceneDescriptions: []
 --- !u!114 &1630981338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16563,7 +16561,6 @@ MonoBehaviour:
   - {fileID: 3074025264907042843, guid: 4e9f5b3ff3b6fa4aaa4678ac8bf8e429, type: 3}
   - {fileID: 3888281243822881210, guid: 874e3a4a755ef9e639594d1f5df968d1, type: 3}
   - {fileID: 3636473448424179601, guid: e021f2107856b97978976612624c27b8, type: 3}
-  - {fileID: 3814185294606463374, guid: 3f7dd0e9bb47425f3b6515ab77926eb2, type: 3}
   - {fileID: 409024204744052258, guid: 6bbaea1be78b8d02d852cd83ce21cd94, type: 3}
   - {fileID: 4569210884194899160, guid: aad768f876a5d714abefd21f70785ee3, type: 3}
   - {fileID: 5899465670612547514, guid: 4a5c3f58cf4a9055693572e2fb1af5aa, type: 3}
@@ -16604,6 +16601,7 @@ MonoBehaviour:
   PanelScript: {fileID: 988434845}
   PanelWholeText: {fileID: 95678510}
   PanelTaleView: {fileID: 1697338084}
+  PanelScenes: {fileID: 1179490430}
   PanelMainMenu: {fileID: 1136960070}
 --- !u!114 &1630981340
 MonoBehaviour:
@@ -17993,7 +17991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.809, g: 0.809, b: 0.809, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20341,7 +20339,6 @@ GameObject:
   - component: {fileID: 2056306063}
   - component: {fileID: 2056306062}
   - component: {fileID: 2056306061}
-  - component: {fileID: 2056306060}
   m_Layer: 5
   m_Name: ButtonBack
   m_TagString: Untagged
@@ -20369,19 +20366,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2056306060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056306058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 068d494842f6d1548ab4d4fc1021afac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 55100868}
 --- !u!114 &2056306061
 MonoBehaviour:
   m_ObjectHideFlags: 0

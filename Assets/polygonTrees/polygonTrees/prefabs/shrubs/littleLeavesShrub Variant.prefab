@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &4720350348213994816
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3756786847179165282}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6842606971558845926, guid: 01aa103a29aa99b7686b9ec61c48fde4, type: 3}
 --- !u!114 &7278131237508131997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +13,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: littleLeavesShrubVariant
+--- !u!65 &5257325161893412752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756786847179165282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.98284596, y: 1.3172014, z: 1.2205242}
+  m_Center: {x: -0.015154197, y: 0.6426023, z: -0.084063165}
 --- !u!1001 &4099296464423121715
 PrefabInstance:
   m_ObjectHideFlags: 0

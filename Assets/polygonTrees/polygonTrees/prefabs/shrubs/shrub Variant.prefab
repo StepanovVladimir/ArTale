@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &7986609598459941310
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6527066514930576640}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6058517668492572802, guid: c79fabe36f46308ce9812c017552943f, type: 3}
 --- !u!114 &-6901795707713221440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +13,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: shrubVariant
+--- !u!65 &-8627493263280604062
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527066514930576640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7230307, y: 1.1936764, z: 0.84029084}
+  m_Center: {x: -0.046797898, y: 0.5968382, z: -0.044313412}
 --- !u!1001 &6221060670843359313
 PrefabInstance:
   m_ObjectHideFlags: 0

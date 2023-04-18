@@ -11,6 +11,7 @@ namespace Assets.Scripts.Model
     {
         public int sceneId;
         public string title;
+        public string sceneDescription;
         public List<ScriptPart> script;
     }
 }

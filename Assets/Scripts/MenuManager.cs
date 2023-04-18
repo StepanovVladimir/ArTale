@@ -44,6 +44,7 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelScript;
     public GameObject PanelWholeText;
     public GameObject PanelTaleView;
+    public GameObject PanelScenes;
 
     private TaleModel _taleModel;
 

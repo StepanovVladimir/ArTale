@@ -202,7 +202,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallStoneArchWindows
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2518756538247702295, guid: 8311207f1bb1f4972bbc30c10dc0a3a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8311207f1bb1f4972bbc30c10dc0a3a7, type: 3}
 --- !u!4 &5564628591753721354 stripped
 Transform:
@@ -264,7 +265,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1736394290029697717, guid: 6a563f46bf79b47fbb035a2c7f6a85ec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6a563f46bf79b47fbb035a2c7f6a85ec, type: 3}
 --- !u!4 &8851523207549865907 stripped
 Transform:
@@ -326,7 +328,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6593166343232789060, guid: ebaef1df105b84c5bad893bb42f0d493, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ebaef1df105b84c5bad893bb42f0d493, type: 3}
 --- !u!4 &7309333915796993343 stripped
 Transform:
@@ -388,7 +391,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallStoneArchWindows (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2518756538247702295, guid: 8311207f1bb1f4972bbc30c10dc0a3a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8311207f1bb1f4972bbc30c10dc0a3a7, type: 3}
 --- !u!4 &6053215679305638827 stripped
 Transform:
@@ -574,7 +578,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6593166343232789060, guid: ebaef1df105b84c5bad893bb42f0d493, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ebaef1df105b84c5bad893bb42f0d493, type: 3}
 --- !u!4 &6420661208436358327 stripped
 Transform:
@@ -698,7 +703,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1076509713815603185, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+    - {fileID: 1920740685981823837, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+    - {fileID: 8024993746810228698, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
 --- !u!4 &601030180170115906 stripped
 Transform:
@@ -822,7 +830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneWallWithArchway (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1092511412069202098, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
+    - {fileID: 1151683918842101235, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
+    - {fileID: 6633695724561866670, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
 --- !u!4 &5284787722576184938 stripped
 Transform:
@@ -1566,7 +1577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneWallWithArchway
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1092511412069202098, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
+    - {fileID: 1151683918842101235, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
+    - {fileID: 6633695724561866670, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a293a433c5a14abaa73eddf49f3c33d, type: 3}
 --- !u!4 &8544179470082624083 stripped
 Transform:
@@ -1628,7 +1642,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1736394290029697717, guid: 6a563f46bf79b47fbb035a2c7f6a85ec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6a563f46bf79b47fbb035a2c7f6a85ec, type: 3}
 --- !u!4 &169121518004756456 stripped
 Transform:

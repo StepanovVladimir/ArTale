@@ -12,7 +12,7 @@ public class PreviewSceneObject : MonoBehaviour
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(OnMouseClick);
     }
-
+    
     void OnMouseClick()
     {
         Debug.Log("Drag ended!");
@@ -27,8 +27,8 @@ public class PreviewSceneObject : MonoBehaviour
         Debug.Log(sceneObject);
         GameObject obj = Instantiate(sceneObject, CurrentScene.transform);
         obj.SetActive(true);
-        obj.transform.position = new Vector3(hit.point.x, 0.06f, hit.point.z);
-        obj.transform.localPosition = new Vector3(hit.point.x, 0.06f, hit.point.z);
+        obj.transform.position = new Vector3(hit.point.x, -1f, hit.point.z);
+        obj.transform.localPosition = new Vector3(hit.point.x, -1f, hit.point.z);
         //Debug.Log(hit.point);
         //Debug.Log(obj.transform.position);
     }

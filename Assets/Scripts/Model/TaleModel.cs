@@ -107,14 +107,22 @@ namespace Assets.Scripts
         private ScriptScenes GetScript()
         {
             ScriptScenes script = new ScriptScenes { scenes = new List<ScriptScene>() };
+            script.wholeText = _taleManager.WholeTextInputField.text;
             for (int i = 0; i < _taleManager.SceneNames.Count; i++)
             {
-                script.scenes.Add(new ScriptScene
+                var scriptScene = new ScriptScene
                 {
                     sceneId = i + 1,
                     title = _taleManager.SceneNames[i],
                     script = new List<ScriptPart> { new ScriptPart { text = _taleManager.SceneScripts[i] } }
-                });
+                };
+
+                if (_taleManager.SceneDescriptions.Count > 0)
+                {
+                    scriptScene.sceneDescription = _taleManager.SceneDescriptions[i];
+                }
+
+                script.scenes.Add(scriptScene);
             }
 
             return script;
@@ -155,9 +163,15 @@ namespace Assets.Scripts
 
             _taleManager.ClearTale();
 
+            if (script.wholeText != null)
+            {
+                _taleManager.WholeTextInputField.text = script.wholeText;
+            }
+
             foreach (Scene scene in tale.scenes)
             {
                 ButtonScene bs = _taleManager.CreateScene(scene.name);
+                bs.Scene.SetActive(false);
                 bs.SceneId = scene.id;
                 bs.gameObject.transform.position = scene.btnPosition;
                 foreach (Obj obj in scene.objs)
@@ -168,6 +182,10 @@ namespace Assets.Scripts
 
                 _taleManager.SceneNames.Add(script.scenes[scene.id - 1].title);
                 _taleManager.SceneScripts.Add(script.scenes[scene.id - 1].script[0].text);
+                if (script.scenes[scene.id - 1].sceneDescription != null && !script.scenes[scene.id - 1].sceneDescription.Equals(""))
+                {
+                    _taleManager.SceneDescriptions.Add(script.scenes[scene.id - 1].sceneDescription);
+                }
             }
             _taleManager.UpdateVisibleScenes();
             LoadModels(pathModels);
@@ -180,6 +198,17 @@ namespace Assets.Scripts
                 _taleManager.Links.Add(Convert.ToInt32(ab[0]), b);
             }
             _taleManager.RenderLinks();
+
+            if (_taleManager.SceneDescriptions.Count > 0)
+            {
+                _taleManager.ActivateBtnGenerateText();
+            }
+
+            if (!_taleManager.WholeTextInputField.text.Equals(""))
+            {
+                _taleManager.ActivateBtnWholeText();
+                _taleManager.SetOnWhichSceneMoveText();
+            }
         }
 
         public string Download(string link)
@@ -283,20 +312,17 @@ namespace Assets.Scripts
         {
             GameObject objModel;
             DrawPreviewSceneObjects drawerPreview = _taleManager.GetComponent<DrawPreviewSceneObjects>();
-            Debug.Log("YA TUTA");
             if (drawerPreview.StandartObjectsDict.ContainsKey(obj.modelFilename))
             {
-                Debug.Log("YES");
                 objModel = _taleManager.InstantiateObj(drawerPreview.StandartObjectsDict[obj.modelFilename].gameObject);
             }
             else
             {
-                Debug.Log("NO");
                 objModel = CreateObjFromFile(pathModels + obj.modelFilename);
             }
 
-            objModel.transform.position = obj.position;
-            objModel.transform.rotation = obj.rotation;
+            objModel.transform.localPosition = obj.position;
+            objModel.transform.localRotation = obj.rotation;
             objModel.transform.localScale = obj.localScale;
 
             return objModel;
@@ -315,8 +341,8 @@ namespace Assets.Scripts
                 Obj obj = new Obj();
 
                 // common
-                obj.position = _obj.transform.position;
-                obj.rotation = _obj.transform.rotation;
+                obj.position = _obj.transform.localPosition;
+                obj.rotation = _obj.transform.localRotation;
                 obj.localScale = _obj.transform.localScale;
 
                 obj.modelFilename = _obj.GetComponent<MoveObj>().ModelFilename;

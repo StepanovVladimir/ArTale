@@ -23,6 +23,7 @@ public class TaleManager : MonoBehaviour
 
     public GameObject BtnScriptBack;
     public GameObject BtnWholeTextBack;
+    public GameObject BtnMenuBack;
     public GameObject InputSceneName;
     public GameObject InputSceneScript;
 
@@ -65,6 +66,8 @@ public class TaleManager : MonoBehaviour
 
     public List<GameObject> Scenes;
 
+    public InputField WholeTextInputField;
+
     [HideInInspector]
     public List<string> SceneNames;
     [HideInInspector]
@@ -96,6 +99,7 @@ public class TaleManager : MonoBehaviour
 
         BtnScriptBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
         BtnWholeTextBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
+        BtnMenuBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
 
         BtnBack.GetComponent<Button>().onClick.AddListener(BtnBackOnClick);
         BtnAdd.GetComponent<Button>().onClick.AddListener(BtnAddOnClick);
@@ -237,6 +241,18 @@ public class TaleManager : MonoBehaviour
         Utils.HideOtherPanels(GetComponent<MenuManager>().PanelWholeText);
     }
 
+    public void BtnShowPanelMenuOnClick()
+    {
+        IsViewMode = true;
+        Utils.HideOtherPanels(GetComponent<MenuManager>().PanelEditorMenu);
+    }
+
+    public void BtnShowPanelScenesOnClick()
+    {
+        IsViewMode = true;
+        Utils.HideOtherPanels(GetComponent<MenuManager>().PanelScenes);
+    }
+
     private void BtnBackOnClick()
     {
         IsViewMode = false;
@@ -282,6 +298,8 @@ public class TaleManager : MonoBehaviour
         Links = new Dictionary<int, List<int>>();
         SceneNames = new List<string>();
         SceneScripts = new List<string>();
+        SceneDescriptions = new List<string>();
+        WholeTextInputField.text = "";
         LinkFirstScene = -1;
         IsModeLink = false;
         LastSceneNumber = 1;
@@ -455,6 +473,7 @@ public class TaleManager : MonoBehaviour
     {
         SceneScripts[indexSceneOnWhichMoveText] = InputFieldOnPanelWholeText.GetComponent<InputField>().text;
         UpdateVisibleScenes();
+        GetComponent<MenuManager>().OnClickSaveTale();
         InputFieldOnPanelWholeText.GetComponent<InputField>().text = "";
         SetOnWhichSceneMoveText();
     }
@@ -462,5 +481,16 @@ public class TaleManager : MonoBehaviour
     public GameObject InstantiateObj(GameObject gameObject)
     {
         return Instantiate(gameObject);
+    }
+
+    public string GetMessage()
+    {
+        string message = "Ќапиши текст с диалогами дл€ русской народной сказки на основе данной сюжетной линии:\n";
+        foreach (string description in SceneDescriptions)
+        {
+            message += $"{description}\n";
+        }
+
+        return message;
     }
 }

@@ -9,6 +9,7 @@ namespace Assets.Scripts.Model
     [Serializable]
     class ScriptScenes
     {
+        public string wholeText;
         public List<ScriptScene> scenes;
     }
 }

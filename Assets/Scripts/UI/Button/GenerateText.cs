@@ -5,7 +5,6 @@ using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.UI;
-using System.Threading;
 
 public class GenerateText : MonoBehaviour
 {
@@ -24,10 +23,7 @@ public class GenerateText : MonoBehaviour
         public Choice[] choices;
     }
 
-    public InputField inputField;
     public GameObject panelWait;
-
-    public string Message { get; set; }
 
     public async void GenerateTextHandler()
     {
@@ -36,21 +32,27 @@ public class GenerateText : MonoBehaviour
         var apiKey = "";
         http.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
 
+        Camera camera = Camera.main;
+        TaleManager taleManager = camera.GetComponent<TaleManager>();
+
         var jsonContent = new
         {
             model = "gpt-3.5-turbo",
-            messages = new[] { new { role = "user", content = Message } }
+            messages = new[] { new { role = "user", content = taleManager.GetMessage() } }
         };
 
+        Debug.Log(jsonContent.messages[0].content);
+
         panelWait.SetActive(true);
-        //var responseContent = await http.PostAsync("https://api.openai.com/v1/chat/completions", new StringContent(JsonConvert.SerializeObject(jsonContent), Encoding.UTF8, "application/json"));
-        //var resContext = await responseContent.Content.ReadAsStringAsync();
+        var responseContent = await http.PostAsync("https://api.openai.com/v1/chat/completions", new StringContent(JsonConvert.SerializeObject(jsonContent), Encoding.UTF8, "application/json"));
+        var resContext = await responseContent.Content.ReadAsStringAsync();
 
-        //var data = JsonConvert.DeserializeObject<Response>(resContext);
-        //Debug.Log(data.choices[0].message.content);
-        //inputField.text = data.choices[0].message.content;
+        var data = JsonConvert.DeserializeObject<Response>(resContext);
+        Debug.Log(data.choices[0].message.content);
 
-        string text = "Во дворце царь и царевна жили долго и счастливо, пока однажды царевна не отлучилась в сад. Тут же на неё напал змей и унёс её в небеса. Царь был в отчаянии и решил сообщить об этом всему царству.\n\n";
+        taleManager.WholeTextInputField.text = data.choices[0].message.content.Replace("\n\n", "\n");
+
+        /*string text = "Во дворце царь и царевна жили долго и счастливо, пока однажды царевна не отлучилась в сад. Тут же на неё напал змей и унёс её в небеса. Царь был в отчаянии и решил сообщить об этом всему царству.\n\n";
         text += "- Надо что-то делать! - воскликнул царь. - Кто поможет мне вернуть мою дочь?\n\n";
         text += "- Я помогу, - ответил Иван, который был рядом.\n\n";
         text += "- Спасибо тебе, Иван! - сказал царь. - Буду очень благодарен, если ты вернёшь мне мою дочь.\n\n";
@@ -63,15 +65,12 @@ public class GenerateText : MonoBehaviour
         text += "С помощью этого меча Иван справился со змеихой и вернулся к царю во дворец. Царь был очень рад, что его дочь вернулась, и женил Ивана на царевне.\n\n";
         text += "- Ты настоящий герой, Иван! - сказал царь. - Теперь ты мой зять и будешь жить с нами во дворце.\n\n";
 
-        inputField.text = text.Replace("\n\n", "\n");
+        taleManager.WholeTextInputField.text = text.Replace("\n\n", "\n");*/
 
-        Camera camera = Camera.main;
-        TaleManager taleManager = camera.GetComponent<TaleManager>();
         taleManager.ActivateBtnWholeText();
         taleManager.SetOnWhichSceneMoveText();
-
-        Thread.Sleep(10000);
-
         taleManager.BtnShowPanelWholeTextOnClick();
+
+        camera.GetComponent<MenuManager>().OnClickSaveTale();
     }
 }

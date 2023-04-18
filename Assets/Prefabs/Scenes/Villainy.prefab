@@ -333,8 +333,8 @@ GameObject:
   - component: {fileID: 8861806333220873760}
   - component: {fileID: 748797250340865774}
   - component: {fileID: 7110690510505774027}
-  - component: {fileID: 5378760236084523619}
   - component: {fileID: 4654403961298331188}
+  - component: {fileID: 5446924282117203415}
   m_Layer: 0
   m_Name: littleLeavesShrub Variant(Clone)
   m_TagString: Untagged
@@ -350,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711450166776916705}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.648, y: 0.06, z: -1.014}
+  m_LocalPosition: {x: -1.014, y: -1, z: 0.352}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -407,20 +407,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5378760236084523619
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711450166776916705}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6842606971558845926, guid: 01aa103a29aa99b7686b9ec61c48fde4, type: 3}
 --- !u!114 &4654403961298331188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +420,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: littleLeavesShrubVariant
+--- !u!65 &5446924282117203415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711450166776916705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.98284596, y: 1.3172014, z: 1.2205242}
+  m_Center: {x: -0.015154197, y: 0.6426023, z: -0.084063165}
 --- !u!1 &768737211103064283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,8 +2409,8 @@ GameObject:
   - component: {fileID: 1420797319200585089}
   - component: {fileID: 5699748366164032169}
   - component: {fileID: 7797305447059541188}
-  - component: {fileID: 197683395914327628}
   - component: {fileID: 1098177074347584244}
+  - component: {fileID: 1664058859129145029}
   m_Layer: 0
   m_Name: fallenBranchesTree Variant(Clone)
   m_TagString: Untagged
@@ -2427,7 +2426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3766662958388692110}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.69, y: 0.06, z: -0.547}
+  m_LocalPosition: {x: -0.547, y: -1, z: 0.31}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -2484,20 +2483,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &197683395914327628
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3766662958388692110}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 481848653124785962, guid: 8de141720bc4aa5debd9f47d7cac2db5, type: 3}
 --- !u!114 &1098177074347584244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2511,6 +2496,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: fallenBranchesTreeVariant
+--- !u!65 &1664058859129145029
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766662958388692110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.7650702, y: 5.240065, z: 3.5136225}
+  m_Center: {x: 0.025894223, y: 2.6200325, z: -0.16035871}
 --- !u!1 &3804848210818315557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,15 +2750,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4130997994191252953}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.06, z: -2.604}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -2.604, y: -1, z: 1}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children:
   - {fileID: 2967502110446768382}
   - {fileID: 2173500052794038768}
   m_Father: {fileID: 4383338235069300569}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &6934990283701670160
 Animator:
   serializedVersion: 3
@@ -3096,8 +3094,8 @@ GameObject:
   - component: {fileID: 8604206696440762858}
   - component: {fileID: 3724065456583206232}
   - component: {fileID: 8570268938172929479}
-  - component: {fileID: 7961117020704764530}
   - component: {fileID: 2970429828467412093}
+  - component: {fileID: 4005620178428951660}
   m_Layer: 0
   m_Name: bigLeavesShrubs Variant(Clone)
   m_TagString: Untagged
@@ -3113,7 +3111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4671953990643514677}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.661, y: 0.06, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0.339}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -3170,20 +3168,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7961117020704764530
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671953990643514677}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6581508452666011285, guid: 606069ef88593eae49cdff6264762507, type: 3}
 --- !u!114 &2970429828467412093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3197,6 +3181,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: bigLeavesShrubsVariant
+--- !u!65 &4005620178428951660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671953990643514677}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0272559, y: 1.3368337, z: 1.0005537}
+  m_Center: {x: 0.0052995677, y: 0.64978576, z: -0.0063128914}
 --- !u!1 &4725052099258347746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,8 +3205,8 @@ GameObject:
   - component: {fileID: 8031425974348294787}
   - component: {fileID: 5128400751343915944}
   - component: {fileID: 2042739096068870488}
-  - component: {fileID: 1668518162956217138}
   - component: {fileID: 173071436300920968}
+  - component: {fileID: 7012152829860566828}
   m_Layer: 0
   m_Name: shrub Variant(Clone)
   m_TagString: Untagged
@@ -3225,7 +3222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4725052099258347746}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.673, y: 0.06, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 1.673}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -3282,20 +3279,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1668518162956217138
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725052099258347746}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6058517668492572802, guid: c79fabe36f46308ce9812c017552943f, type: 3}
 --- !u!114 &173071436300920968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3309,6 +3292,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: shrubVariant
+--- !u!65 &7012152829860566828
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725052099258347746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7230307, y: 1.1936764, z: 0.84029084}
+  m_Center: {x: -0.046797898, y: 0.5968382, z: -0.044313412}
 --- !u!1 &4781495178234266102
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,8 +3316,8 @@ GameObject:
   - component: {fileID: 6947291135299632967}
   - component: {fileID: 3946918438093031543}
   - component: {fileID: 5683087662542636933}
-  - component: {fileID: 7866560120761496866}
   - component: {fileID: 9209124466478055418}
+  - component: {fileID: 881632200466703775}
   m_Layer: 0
   m_Name: bigLeavesTree Variant(Clone)
   m_TagString: Untagged
@@ -3337,7 +3333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4781495178234266102}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.762, y: 0.06, z: -0.575}
+  m_LocalPosition: {x: -0.575, y: -1, z: 1.762}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -3394,20 +3390,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7866560120761496866
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4781495178234266102}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4790000225344279549, guid: 331e6cacaa5064ecb91f918c9aca93fd, type: 3}
 --- !u!114 &9209124466478055418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3421,6 +3403,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: bigLeavesTreeVariant
+--- !u!65 &881632200466703775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4781495178234266102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9858785, y: 6.335993, z: 3.8364286}
+  m_Center: {x: 0.043994542, y: 3.1679964, z: -0.09312522}
 --- !u!1 &4790726791128448555
 GameObject:
   m_ObjectHideFlags: 0
@@ -4499,8 +4494,8 @@ GameObject:
   - component: {fileID: 8509058560920252598}
   - component: {fileID: 9159992175424972878}
   - component: {fileID: 6250035886647667879}
-  - component: {fileID: 5775408967432064969}
   - component: {fileID: 8241140803438560733}
+  - component: {fileID: 38866997053070809}
   m_Layer: 0
   m_Name: littleLeavesShrub Variant(Clone)
   m_TagString: Untagged
@@ -4516,7 +4511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6251335673647674340}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.564, y: 0.06, z: 0.974}
+  m_LocalPosition: {x: 0.974, y: -1, z: 1.564}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -4573,20 +4568,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5775408967432064969
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6251335673647674340}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6842606971558845926, guid: 01aa103a29aa99b7686b9ec61c48fde4, type: 3}
 --- !u!114 &8241140803438560733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4600,6 +4581,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: littleLeavesShrubVariant
+--- !u!65 &38866997053070809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251335673647674340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.98284596, y: 1.3172014, z: 1.2205242}
+  m_Center: {x: -0.015154197, y: 0.6426023, z: -0.084063165}
 --- !u!1 &6256779835027757960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4611,8 +4605,8 @@ GameObject:
   - component: {fileID: 3546669615695967982}
   - component: {fileID: 107067117764370181}
   - component: {fileID: 169612408068886261}
-  - component: {fileID: 5073332650389530261}
   - component: {fileID: 2556702761271385953}
+  - component: {fileID: 8201325288392552495}
   m_Layer: 0
   m_Name: shrub Variant(Clone)
   m_TagString: Untagged
@@ -4628,7 +4622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6256779835027757960}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.623, y: 0.06, z: 1.007}
+  m_LocalPosition: {x: 1.007, y: -1, z: 0.37699997}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -4685,20 +4679,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5073332650389530261
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6256779835027757960}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6058517668492572802, guid: c79fabe36f46308ce9812c017552943f, type: 3}
 --- !u!114 &2556702761271385953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4712,6 +4692,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: shrubVariant
+--- !u!65 &8201325288392552495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256779835027757960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7230307, y: 1.1936764, z: 0.84029084}
+  m_Center: {x: -0.046797898, y: 0.5968382, z: -0.044313412}
 --- !u!1 &6268656432265257647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,8 +5224,8 @@ GameObject:
   - component: {fileID: 6527041767877525165}
   - component: {fileID: 2398470974724778439}
   - component: {fileID: 3155480983859120574}
-  - component: {fileID: 7739859700271570392}
   - component: {fileID: 3535539291139693669}
+  - component: {fileID: 2369576930857438558}
   m_Layer: 0
   m_Name: simpleTree Variant(Clone)
   m_TagString: Untagged
@@ -5248,7 +5241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6760069449546208209}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.748, y: 0.06, z: 0.525}
+  m_LocalPosition: {x: 0.525, y: -1, z: 0.25199997}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -5305,20 +5298,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7739859700271570392
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6760069449546208209}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7174666112318797652, guid: b61cbb3a5418451ef879c216ad91ec47, type: 3}
 --- !u!114 &3535539291139693669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5332,6 +5311,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: simpleTreeVariant
+--- !u!65 &2369576930857438558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760069449546208209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9028993, y: 5.802818, z: 4.073834}
+  m_Center: {x: -0.0017299651, y: 2.901409, z: 0.06104326}
 --- !u!1 &6808369017669936227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5434,8 +5426,8 @@ GameObject:
   - component: {fileID: 8630987091449104769}
   - component: {fileID: 8424203506239090879}
   - component: {fileID: 7789220687578005681}
-  - component: {fileID: 8228018981863711641}
   - component: {fileID: 2444842445925416004}
+  - component: {fileID: 5914330553409624653}
   m_Layer: 0
   m_Name: purpleTree Variant(Clone)
   m_TagString: Untagged
@@ -5451,7 +5443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6933650866335914487}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.693, y: 0.06, z: 0.465}
+  m_LocalPosition: {x: 0.465, y: -1, z: 1.693}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -5508,20 +5500,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8228018981863711641
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6933650866335914487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 529265832685697416, guid: dab065333028e7dbc8bdea91c6e0e797, type: 3}
 --- !u!114 &2444842445925416004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5535,6 +5513,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: purpleTreeVariant
+--- !u!65 &5914330553409624653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933650866335914487}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.90545, y: 5.1214275, z: 5.6269336}
+  m_Center: {x: 0.238317, y: 2.5607138, z: 0.1528083}
 --- !u!1 &6981020013580289640
 GameObject:
   m_ObjectHideFlags: 0
@@ -6599,8 +6590,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354069247795019954}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.06, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -1, z: 1}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children:
   - {fileID: 8233352324158475522}
@@ -6613,7 +6604,7 @@ Transform:
   - {fileID: 8481731008826761752}
   m_Father: {fileID: 4383338235069300569}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &4532793229213541331
 Animator:
   serializedVersion: 3
@@ -6885,8 +6876,8 @@ GameObject:
   - component: {fileID: 7885547773687647319}
   - component: {fileID: 7290402726953606524}
   - component: {fileID: 8997716978286117075}
-  - component: {fileID: 8658127391121509048}
   - component: {fileID: 4706039203504938266}
+  - component: {fileID: 3642048025388116303}
   m_Layer: 0
   m_Name: bigLeavesShrubs Variant(Clone)
   m_TagString: Untagged
@@ -6902,7 +6893,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8544662910920219698}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.683, y: 0.06, z: -1.065}
+  m_LocalPosition: {x: -1.065, y: -1, z: 1.683}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 4383338235069300569}
@@ -6959,20 +6950,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8658127391121509048
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8544662910920219698}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6581508452666011285, guid: 606069ef88593eae49cdff6264762507, type: 3}
 --- !u!114 &4706039203504938266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6986,6 +6963,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: bigLeavesShrubsVariant
+--- !u!65 &3642048025388116303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8544662910920219698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0272559, y: 1.3368337, z: 1.0005537}
+  m_Center: {x: 0.0052995677, y: 0.64978576, z: -0.0063128914}
 --- !u!1 &8553153248545980701
 GameObject:
   m_ObjectHideFlags: 0
@@ -7521,15 +7511,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1873895882438863578, guid: ff683a85ca83ae2499f2d2ff02a92b45, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1873895882438863578, guid: ff683a85ca83ae2499f2d2ff02a92b45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1873895882438863578, guid: ff683a85ca83ae2499f2d2ff02a92b45, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1873895882438863578, guid: ff683a85ca83ae2499f2d2ff02a92b45, type: 3}
       propertyPath: m_LocalRotation.w

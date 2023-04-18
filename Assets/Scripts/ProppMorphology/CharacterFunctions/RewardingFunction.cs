@@ -30,7 +30,7 @@ namespace Assets.Scripts.ProppMorphology.CharacterFunctions
             {
                 StorylineString = "Царь женит Никиту Кожемяку на царевне";
             }
-            StorylineString = "Царь женит Ивана на царевне";
+
             if (rewardIsMarriage)
             {
                 AdditionalCharacter2 = characters.Victim;

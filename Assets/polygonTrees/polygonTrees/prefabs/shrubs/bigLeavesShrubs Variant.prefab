@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &-4661909556657951482
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073815990686323864}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6581508452666011285, guid: 606069ef88593eae49cdff6264762507, type: 3}
 --- !u!114 &5657111168341982297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +13,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelFilename: bigLeavesShrubsVariant
+--- !u!65 &3072114015846439271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073815990686323864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0272559, y: 1.3368337, z: 1.0005537}
+  m_Center: {x: 0.0052995677, y: 0.64978576, z: -0.0063128914}
 --- !u!1001 &155264397629139401
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,10 +21,8 @@ public class GenerateScenes : MonoBehaviour
         float yPosition = 615;
         bool down = true;
 
-        generateText.Message = "Напиши текст с диалогами для русской народной сказки на основе данной сюжетной линии:\n";
-
         characterFunctions.ForEach(f => {
-            string s = $"Место: {f.Place}\nДействующий персонаж: {f.ActingCharacter}";
+            /*string s = $"Место: {f.Place}\nДействующий персонаж: {f.ActingCharacter}";
             if (f.AdditionalCharacter1 != null)
             {
                 s += $"\nДополнительный персонаж 1: {f.AdditionalCharacter1}";
@@ -32,19 +30,16 @@ public class GenerateScenes : MonoBehaviour
             if (f.AdditionalCharacter2 != null)
             {
                 s += $"\nДополнительный персонаж 2: {f.AdditionalCharacter2}";
-            }
-
-            //Debug.Log(s);
+            }*/
 
             ButtonScene bs = taleManager.CreateScene($"{i}. {f.Name}", f.SceneIndex);
+            bs.Scene.SetActive(false);
             bs.SceneId = i;
             bs.gameObject.transform.position = new Vector3(xPosition, yPosition, 0);
 
             taleManager.SceneNames.Add(f.Name);
             taleManager.SceneScripts.Add("");
             taleManager.SceneDescriptions.Add(f.StorylineString);
-
-            generateText.Message += $"{f.StorylineString}\n";
 
             if (i > 1)
             {
