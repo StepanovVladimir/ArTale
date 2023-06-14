@@ -28,7 +28,7 @@ public class PreviewSceneObject : MonoBehaviour
         GameObject obj = Instantiate(sceneObject, CurrentScene.transform);
         obj.SetActive(true);
         obj.transform.position = new Vector3(hit.point.x, -1f, hit.point.z);
-        obj.transform.localPosition = new Vector3(hit.point.x, -1f, hit.point.z);
+        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, -1f, obj.transform.localPosition.z);
         //Debug.Log(hit.point);
         //Debug.Log(obj.transform.position);
     }

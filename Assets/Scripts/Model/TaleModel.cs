@@ -20,6 +20,8 @@ namespace Assets.Scripts
 
         private TaleManager _taleManager;
 
+        private string TaleNameId = Guid.NewGuid().ToString("N");
+
         public TaleModel(TaleManager taleManager)
         {
             _taleManager = taleManager;
@@ -71,8 +73,8 @@ namespace Assets.Scripts
         public void Load()
         {
             Tale tale = ReadFile();
-            ScriptScenes script = ReadScript();
-            Unserialize(tale, script);
+            Script = ReadScript();
+            Unserialize(tale);
         }
 
         public void Save()
@@ -156,16 +158,16 @@ namespace Assets.Scripts
             return sTime.AddSeconds(unixtime);
         }
 
-        private void Unserialize(Tale tale, ScriptScenes script)
+        private void Unserialize(Tale tale)
         {
             string pathTaleRoot = Utils.PathSaves + TaleName + "/";
             string pathModels = pathTaleRoot + "Models/";
 
             _taleManager.ClearTale();
 
-            if (script.wholeText != null)
+            if (Script.wholeText != null)
             {
-                _taleManager.WholeTextInputField.text = script.wholeText;
+                _taleManager.WholeTextInputField.text = Script.wholeText;
             }
 
             foreach (Scene scene in tale.scenes)
@@ -180,11 +182,11 @@ namespace Assets.Scripts
                     objModel.transform.SetParent(bs.Scene.transform);
                 }
 
-                _taleManager.SceneNames.Add(script.scenes[scene.id - 1].title);
-                _taleManager.SceneScripts.Add(script.scenes[scene.id - 1].script[0].text);
-                if (script.scenes[scene.id - 1].sceneDescription != null && !script.scenes[scene.id - 1].sceneDescription.Equals(""))
+                _taleManager.SceneNames.Add(Script.scenes[scene.id - 1].title);
+                _taleManager.SceneScripts.Add(Script.scenes[scene.id - 1].script[0].text);
+                if (Script.scenes[scene.id - 1].sceneDescription != null && !Script.scenes[scene.id - 1].sceneDescription.Equals(""))
                 {
-                    _taleManager.SceneDescriptions.Add(script.scenes[scene.id - 1].sceneDescription);
+                    _taleManager.SceneDescriptions.Add(Script.scenes[scene.id - 1].sceneDescription);
                 }
             }
             _taleManager.UpdateVisibleScenes();
@@ -215,7 +217,7 @@ namespace Assets.Scripts
         {
             string[] parts = link.Split(new char[] { '/' });
             string taleNameZip = parts[parts.Length - 1];
-            string taleName = taleNameZip.Split(new char[] { '.' })[0];
+            //string taleName = taleNameZip.Split(new char[] { '.' })[0];
             string pathTaleZip = Utils.PathSaves + taleNameZip;
             WebClient Client = new WebClient();
             if (File.Exists(pathTaleZip))
@@ -224,14 +226,20 @@ namespace Assets.Scripts
             }
             Client.DownloadFile(link, pathTaleZip);
 
-            string pathTale = Utils.PathSaves + taleName + "/";
+            ZipArchive archive = ZipFile.OpenRead(pathTaleZip);
+            ZipArchiveEntry entry = archive.GetEntry("tale.json");
+            StreamReader reader = new StreamReader(entry.Open());
+            string json = reader.ReadToEnd();
+            Tale tale = JsonUtility.FromJson<Tale>(json);
+
+            string pathTale = Utils.PathSaves + tale.TaleName + "/";
             if (Directory.Exists(pathTale))
             {
                 Directory.Delete(pathTale, true);
             }
             ZipFile.ExtractToDirectory(pathTaleZip, pathTale);
 
-            return taleName;
+            return tale.TaleName;
         }
 
         public ShareResponse Share()
@@ -239,20 +247,22 @@ namespace Assets.Scripts
             Utils.DisableSSL();
             using (WebClient client = new WebClient())
             {
-                string filepath = ZipTale();
+                string filepath = ZipTale(TaleName, TaleNameId);
 
-                byte[] responseB = client.UploadFile(Utils.UploadUrl + "?taleName=" + TaleName, filepath);
+                byte[] responseB = client.UploadFile(Utils.UploadUrl + "?taleName=" + TaleNameId, filepath);
                 string response = Encoding.Default.GetString(responseB);
                 Debug.Log(response);
+
+                TaleNameId = Guid.NewGuid().ToString("N");
 
                 return JsonUtility.FromJson<ShareResponse>(response);
             }
         }
 
-        private string ZipTale()
+        private string ZipTale(string taleName, string taleNameId)
         {
-            string pathTale = Utils.PathSaves + TaleName + "/";
-            string pathTaleZip = Utils.PathSaves + TaleName + ".zip";
+            string pathTale = Utils.PathSaves + taleName + "/";
+            string pathTaleZip = Utils.PathSaves + taleNameId + ".zip";
             if (File.Exists(pathTaleZip))
             {
                 File.Delete(pathTaleZip);
@@ -288,6 +298,7 @@ namespace Assets.Scripts
         private Tale Serialize()
         {
             Tale tale = new Tale();
+            tale.TaleName = TaleName;
             tale.Edited = ConvertToUnixTime(DateTime.Now);
             foreach (Transform _scene in _taleManager.ImgTarget.transform)
             {
@@ -375,14 +386,6 @@ namespace Assets.Scripts
                 File.Delete(dest);
             }
             File.Copy(path, dest);
-        }
-
-        public ScriptScenes LoadScript()
-        {
-            string pathTaleRoot = Utils.PathSaves + TaleName + "/";
-            string pathTale = pathTaleRoot + "script.json";
-            string json = File.ReadAllText(pathTale);
-            return JsonUtility.FromJson<ScriptScenes>(json);
         }
 
         public void ShowSceneById(int id)

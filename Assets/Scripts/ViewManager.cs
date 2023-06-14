@@ -54,7 +54,6 @@ public class ViewManager : MonoBehaviour
 
         _taleModel.TaleName = taleName;
         _taleModel.Load();
-        _taleModel.Script = _taleModel.LoadScript();
         Debug.Log(JsonUtility.ToJson(_taleModel.Script, true));
 
         ShowScript();

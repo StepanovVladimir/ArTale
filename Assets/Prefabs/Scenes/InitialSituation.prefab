@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b3c1e4b4f4cd640a853399f7607033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelFilename: grass.gltf
+  ModelFilename: grass
 --- !u!1 &1182601538124873777
 GameObject:
   m_ObjectHideFlags: 0

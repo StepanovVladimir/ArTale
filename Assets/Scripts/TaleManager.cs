@@ -283,12 +283,13 @@ public class TaleManager : MonoBehaviour
     {
         ClearTaleWithoutClearObjectsForScene();
 
+        BtnGenerateText.GetComponent<Button>().interactable = false;
+        BtnWholeText.SetActive(false);
+
         DrawPreviewSceneObjects drawerPreview = GetComponent<DrawPreviewSceneObjects>();
-        drawerPreview.ClearObjectsForScene();
         foreach (Transform sc in drawerPreview.ContentScroll.transform)
         {
             Destroy(sc.gameObject);
-            Destroy(sc.gameObject.GetComponent<PreviewSceneObject>().sceneObject);
         }
         drawerPreview.ClearObjectsForScene();
     }
@@ -317,9 +318,6 @@ public class TaleManager : MonoBehaviour
         }
         Lines = new GameObject();
         Lines.transform.SetParent(PanelScenesGraph.transform);
-
-        BtnGenerateText.GetComponent<Button>().interactable = false;
-        BtnWholeText.SetActive(false);
     }
 
     public void BtnAddOnClick()
