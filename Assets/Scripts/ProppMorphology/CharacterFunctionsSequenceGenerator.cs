@@ -30,7 +30,7 @@ namespace Assets.Scripts.ProppMorphology
                 antagonistsPlace = "Логово трёхглавого змея";
                 finalLocation = "Царский дворец";
 
-                int randomValue = rnd.Next(0, 4);
+                int randomValue = rnd.Next(0, 3);
                 if (randomValue == 0)
                 {
                     characters.Hero = "Иван";
@@ -40,10 +40,6 @@ namespace Assets.Scripts.ProppMorphology
                     characters.Hero = "Фролка";
                 }
                 else if (randomValue == 2)
-                {
-                    characters.Hero = "Зорька";
-                }
-                else
                 {
                     characters.Hero = "Никита кожемяка";
                 }
